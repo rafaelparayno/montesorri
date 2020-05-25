@@ -18,9 +18,9 @@
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn mr-2 btn-primary">Login</button>
+                        <button type="submit" onClick="" class="btn mr-2 btn-primary">Login</button>
 
-                        <a href="#">Forgot Password?</a>
+                        <a href="./pages/dashboard.php">Forgot Password?</a>
                     </div>
 
                 </form>
