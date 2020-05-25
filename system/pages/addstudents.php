@@ -37,9 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             'dasdasd-123'
         );
 
-        header('Location: ./students.php');
+        //header('Location: ./students.php');
     }
-  
+    // $log = true;
+}
 
 ?>
 <main>
