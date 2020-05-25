@@ -1,50 +1,15 @@
 <?php
 include('header.php');
 include('navigation.php');
+$sno = $_GET['sid'];
 
-$lastid = $personal->getLastId() != "" ? $personal->getLastId()  : 0;
-
-$sno = '2020-' . $lastid;
+$studentinfo = $personal->getDatabySno('sno', $sno);
 
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST['addSubmit'])) {
-        $personal->addToPersonal(
-            $_POST['FirstName'],
-            $_POST['LastName'],
-            $_POST['MiddleName'],
-            $_POST['Course'],
-            $_POST['Pob'],
-            $_POST['Dob'],
-            $_POST['Gender'],
-            $_POST['Civil'],
-            $_POST['Nat'],
-            $_POST['Address'],
-            $_POST['ContactNo'],
-            $_POST['email'],
-            $_POST['Rel'],
-            $_POST['age'],
-            $_POST['sno']
-        );
-
-        $result = $family->addFamily(
-            $_POST['Fname'],
-            $_POST['fo'],
-            $_POST['fcno'],
-            $_POST['mname'],
-            $_POST['mo'],
-            $_POST['mcno'],
-            $_POST['gname'],
-            $_POST['gno'],
-            $_POST['grel'],
-            $_POST['Fname'],
-            $_POST['sno']
-        );
-
-        header('Location: ./students.php');
-    }
-    // $log = true;
+if ($studentinfo == "" || $studentinfo == null) {
+    header('Location: ./students.php');
 }
+print_r($studentinfo);
 
 ?>
 <main>
@@ -75,67 +40,67 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 <div class="form-group col-md-4">
                                     <input type="hidden" name="sno" value="<?= $sno ?>" />
                                     <label for="FirstName">First Name</label>
-                                    <input type="text" name="FirstName" class="form-control" id="FirstName" />
+                                    <input type="text" value="<?= $studentinfo['firstname'] ?>" name="FirstName" class="form-control" id="FirstName" />
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="MiddleName">Middle Name</label>
-                                    <input type="text" name="MiddleName" class="form-control" id="MiddleName">
+                                    <input type="text" value="<?= $studentinfo['middlename'] ?>" name="MiddleName" class="form-control" id="MiddleName">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="LastName">Last Name</label>
-                                    <input type="text" name="LastName" class="form-control" id="LastName">
+                                    <input type="text" value="<?= $studentinfo['lastname'] ?>" name="LastName" class="form-control" id="LastName">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="Course">Course</label>
-                                <input type="text" name="Course" class="form-control" id="Course" placeholder="Course">
+                                <input type="text" value="<?= $studentinfo['Course'] ?>" name="Course" class="form-control" id="Course" placeholder="Course">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-3">
                                     <label for="Dob">Date of Birth</label>
-                                    <input type="text" name="Dob" class="form-control" id="Dob" placeholder="dd/mm/yyyy">
+                                    <input type="text" value="<?= $studentinfo['dob'] ?>" name="Dob" class="form-control" id="Dob" placeholder="dd/mm/yyyy">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="Pob">Place of Birth</label>
-                                    <input type="text" name="Pob" class="form-control" id="Pob">
+                                    <input type="text" value="<?= $studentinfo['pob'] ?>" name="Pob" class="form-control" id="Pob">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="Gender">Gender</label>
-                                    <input type="text" name="Gender" class="form-control" id="Gender">
+                                    <input type="text" value="<?= $studentinfo['gender'] ?>" name="Gender" class="form-control" id="Gender">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="age">Age</label>
-                                    <input type="number" name="age" class="form-control" min="0" id="age">
+                                    <input type="number" value="<?= $studentinfo['age'] ?>" name="age" class="form-control" min="0" id="age">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="Civil">Civil</label>
-                                    <input type="text" name="Civil" class="form-control" id="Civil">
+                                    <input type="text" value="<?= $studentinfo['civil'] ?>" name="Civil" class="form-control" id="Civil">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="Nat">Nationality</label>
-                                    <input type="text" name="Nat" class="form-control" id="Nat">
+                                    <input type="text" value="<?= $studentinfo['nationality'] ?>" name="Nat" class="form-control" id="Nat">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="Rel">Religion</label>
-                                    <input type="text" name="Rel" class="form-control" id="Rel">
+                                    <input type="text" value="<?= $studentinfo['Religion'] ?>" name="Rel" class="form-control" id="Rel">
                                 </div>
 
                             </div>
                             <div class="form-group">
                                 <label for="inputAddress2">Address </label>
-                                <input type="text" name="Address" class="form-control" id="inputAddress" placeholder="Address">
+                                <input type="text" value="<?= $studentinfo['Address'] ?>" name="Address" class="form-control" id="inputAddress" placeholder="Address">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="email">Email</label>
-                                    <input type="email" name="email" class="form-control" id="email">
+                                    <input type="email" value="<?= $studentinfo['EmailAdd'] ?>" name="email" class="form-control" id="email">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label for="ContactNo">Contact No</label>
-                                    <input type="text" name="ContactNo" class="form-control" id="ContactNo">
+                                    <input type="text" value="<?= $studentinfo['CpNo'] ?>" name="ContactNo" class="form-control" id="ContactNo">
                                 </div>
 
                             </div>

@@ -64,7 +64,7 @@ class FamilyData
         // if ($result) {
         //     header('Location:' . $_SERVER['PHP_SELF']);
         // }
-
+            return $result;
 
     }
 }

@@ -24,6 +24,17 @@ class PersonalData
         return $resultArray;
     }
 
+    public function getDatabySno($condtion, $searchKey)
+    {
+        $result = $this->db->con->query("SELECT * FROM personaldata WHERE {$condtion} = '{$searchKey}' ");
+
+        $result = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+
+
+        return $result;
+    }
+
     public function insertData($params = null, $table = "personaldata")
     {
         if ($this->db->con != null) {
@@ -40,6 +51,16 @@ class PersonalData
                 return $result;
             }
         }
+    }
+
+    public function getLastId()
+    {
+        $result = $this->db->con->query("SELECT personal_id FROM `personaldata` ORDER BY personal_id DESC");
+        $lastid = $result->fetch_row();
+
+        return $lastid[0];
+
+        //return $;
     }
 
     public function addToPersonal(

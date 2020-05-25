@@ -4,6 +4,7 @@ include('navigation.php');
 $studentsList = $personal->getData();
 
 
+
 ?>
 <main>
     <div class="container-fluid">
@@ -78,7 +79,7 @@ $studentsList = $personal->getData();
 
 
 
-                                    <td><a class="btn btn-md btn-primary" href="">Edit</a>
+                                    <td><a class="btn btn-md btn-primary" href="./editStudent.php?sid=<?= $student['sno'] ?>">Edit</a>
                                         <a class="btn btn-md btn-danger" href="">Delete</a>
                                     </td>
                                 </tr>
