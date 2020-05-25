@@ -22,9 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_POST['age'],
             'dasdasd-123'
         );
+
+        $family->addToPersonal(
+            $_POST['']
+        )
     }
     // $log = true;
 }
+
 ?>
 <main>
     <div class="container-fluid">
@@ -37,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="card-header"><i class="fas fa-user mr-1"></i>Add Students
 
             </div>
-            <p style="font-size: 32px" class='text-danger text-center mt-3'>Just Put N/a In the field if no info in that field</p>
+            <p style="font-size: 16px" class='text-danger text-center mt-3'>Just Put N/a In the field if no info in that field</p>
             <div class="card-body">
                 <div class="container">
                     <form id="regForm" method="POST">
@@ -118,35 +123,37 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                             </div>
                         </div>
-                        <!-- <div class="tab">
+
+
+                        <div class="tab">
                             <h2 class="text-center">Family Details</h2>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="Fname">Father Name</label>
-                                    <input type="text" class="form-control" id="Fname">
+                                    <input type="text" name="Fname" class="form-control" id="Fname">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="fo">Father Occupation</label>
-                                    <input type="text" class="form-control" id="MiddleName">
+                                    <input type="text" name="fo" class="form-control" id="MiddleName">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="fcno">Father's Contact Number</label>
-                                    <input type="text" class="form-control" id="fcno">
+                                    <input type="text"name="fcno" class="form-control" id="fcno">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="mname">Mother Name</label>
-                                    <input type="text" class="form-control" id="mname">
+                                    <input type="text" name="mname" class="form-control" id="mname">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="mo">Mother Occupation</label>
-                                    <input type="text" class="form-control" id="MiddleName">
+                                    <input type="text" name="mo" class="form-control" id="MiddleName">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="mcno">Mother's Contact Number</label>
-                                    <input type="text" class="form-control" id="mcno">
+                                    <input type="text" name="mcno" class="form-control" id="mcno">
                                 </div>
                             </div>
 
@@ -168,12 +175,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 <label for="gadd">Guardian's Address </label>
                                 <input type="text" class="form-control" id="gadd" placeholder="Guardian Address">
                             </div>
-                        </div> -->
+                        </div>
 
 
                         <div class="text-center">
                             <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary btn-lg px-5">Prev</button>
-                            <button id="submitButtonAddStud" type="submit" name="addSubmit" id="nextBtn" class="btn btn-primary btn-lg px-5">Next</button>
+                            <button id="submitButtonAddStud" type="button" name="addSubmit" id="nextBtn" class="btn btn-primary btn-lg px-5" onclick="nextPrev(1)">Next</button>
                         </div>
 
                     </form>

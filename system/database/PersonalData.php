@@ -28,9 +28,11 @@ class PersonalData
     {
         if ($this->db->con != null) {
             if ($params != null) {
-                $columns = implode(',', array_keys($params));
 
+                $columns = implode(',', array_keys($params));
+                // print_r($columns);
                 $values = implode(',', array_values($params));
+                //   print_r($values);
 
                 $query_string = sprintf("INSERT INTO %s(%s) VALUES(%s)", $table, $columns, $values);
 
@@ -60,26 +62,26 @@ class PersonalData
     ) {
 
         $params = array(
-            'firstname' => $fname,
-            'lastname' => $lastname,
-            'middlename' => $middlename,
+            'firstname' => "'{$fname}'",
+            'lastname' => "'{$lastname}'",
+            'middlename' => "'{$middlename}'",
             'Course' => $course,
-            'pob' => $pob,
-            'dob' => $dob,
-            'gender' => $gender,
-            'civil' => $civil,
-            'nationality' => $nat,
-            'Address' => $add,
-            'cpNo' => $cno,
-            'EmailAdd' => $eadd,
-            'Religion' => $rel,
+            'pob' => "'{$pob}'",
+            'dob' => "'{$dob}'",
+            'gender' => "'{$gender}'",
+            'civil' => "'{$civil}'",
+            'nationality' => "'{$nat}'",
+            'Address' => "'{$add}'",
+            'cpNo' => "'{$cno}'",
+            'EmailAdd' => "'{$eadd}'",
+            'Religion' => "'{$rel}'",
             'age' => $age,
-            'sno' => $sno
+            'sno' => "'{$sno}'"
         );
 
         $result = $this->insertData($params);
-        if ($result) {
-            header('Location:' . $_SERVER['PHP_SELF']);
-        }
+        // if ($result) {
+        //     header('Location:' . $_SERVER['PHP_SELF']);
+        // }
     }
 }

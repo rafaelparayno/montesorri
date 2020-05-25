@@ -16,8 +16,9 @@
 
 
     <?php
-    include('./functions.php');
     session_start();
+    include('./functions.php');
+
     ?>
 </head>
 

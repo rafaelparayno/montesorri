@@ -1,6 +1,9 @@
 <?php
 include('header.php');
 include('navigation.php');
+$studentsList = $personal->getData();
+
+
 ?>
 <main>
     <div class="container-fluid">
@@ -56,24 +59,31 @@ include('navigation.php');
                             </tr>
                         </tfoot>
                         <tbody>
-                            <tr>
-                                <td>Doris Wilder</td>
-                                <td>Sales Assistant</td>
-                                <td>Sidney</td>
-                                <td>23</td>
-                                <td>2010/09/20</td>
-                                <td>$85,600</td>
-                                <td>Doris Wilder</td>
-                                <td>Sales Assistant</td>
-                                <td>Sidney</td>
-                                <td>23</td>
-                                <td>2010/09/20</td>
-                                <td>$85,600</td>
-                                <td>$85,600</td>
-                                <td><a class="btn btn-md btn-primary" href="">Edit</a>
-                                    <a class="btn btn-md btn-danger" href="">Delete</a>
-                                </td>
-                            </tr>
+
+                            <?php array_map(function ($student) { ?>
+                                <tr>
+                                    <td><?= $student['sno'] ?></td>
+                                    <td><?= $student['firstname'] . ' ' . $student['lastname'] ?></td>
+                                    <td><?= $student['Course'] ?></td>
+                                    <td><?= $student['pob'] ?></td>
+                                    <td><?= $student['dob'] ?></td>
+                                    <td><?= $student['gender'] ?></td>
+                                    <td><?= $student['civil'] ?></td>
+                                    <td><?= $student['nationality'] ?></td>
+                                    <td><?= $student['Address'] ?></td>
+                                    <td><?= $student['CpNo'] ?></td>
+                                    <td><?= $student['EmailAdd'] ?></td>
+                                    <td><?= $student['Religion'] ?></td>
+                                    <td><?= $student['age'] ?></td>
+
+
+
+                                    <td><a class="btn btn-md btn-primary" href="">Edit</a>
+                                        <a class="btn btn-md btn-danger" href="">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php }, $studentsList) ?>
+
 
                         </tbody>
                     </table>
