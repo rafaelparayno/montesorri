@@ -80,7 +80,7 @@ $studentsList = $personal->getData();
 
 
                                     <td><a class="btn btn-md btn-primary" href="./editStudent.php?sid=<?= $student['sno'] ?>">Edit</a>
-                                        <a class="btn btn-md btn-danger" href="">Delete</a>
+                                        <a data-toggle="modal" data-target="#deleteModal" class="btn btn-md btn-danger" href="">Delete</a>
                                     </td>
                                 </tr>
                             <?php }, $studentsList) ?>
@@ -92,7 +92,32 @@ $studentsList = $personal->getData();
             </div>
         </div>
     </div>
+
+    <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete selected ?</p>
+                </div>
+                <div class="modal-footer">
+                    <form method="action">
+                        <button type="Submit" class="btn btn-primary">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
+
+
+
 <?php
 include('footer.php');
 ?>

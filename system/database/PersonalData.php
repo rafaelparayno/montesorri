@@ -24,7 +24,34 @@ class PersonalData
         return $resultArray;
     }
 
-    public function getDatabySno($condtion, $searchKey)
+    public function updatePersonalData(
+        $firstname,
+        $lastname,
+        $mn,
+        $course,
+        $pob,
+        $dob,
+        $gender,
+        $civil,
+        $nat,
+        $add,
+        $cp,
+        $ead,
+        $rel,
+        $age,
+        $sno
+    ) {
+        $sql = "UPDATE personaldata SET firstname = '{$firstname}', lastname = '{$lastname}',middlename='{$mn}', 
+            course = {$course} ,pob = '{$pob}', dob ='{$dob}', gender='{$gender}', civil ='{$civil}',
+            nationality = '{$nat}',Address= '{$add}', Cpno = '{$cp}', EmailAdd = '{$ead}',
+            Religion = '$rel', age = {$age} WHERE sno = '{$sno}'";
+
+        $result = $this->db->con->query($sql);
+        //echo $sql;
+        return $result;
+    }
+
+    public function getDatabySearching($condtion, $searchKey)
     {
         $result = $this->db->con->query("SELECT * FROM personaldata WHERE {$condtion} = '{$searchKey}' ");
 
@@ -53,15 +80,7 @@ class PersonalData
         }
     }
 
-    public function getLastId()
-    {
-        $result = $this->db->con->query("SELECT personal_id FROM `personaldata` ORDER BY personal_id DESC");
-        $lastid = $result->fetch_row();
 
-        return $lastid[0];
-
-        //return $;
-    }
 
     public function addToPersonal(
         $fname,
@@ -104,5 +123,15 @@ class PersonalData
         // if ($result) {
         //     header('Location:' . $_SERVER['PHP_SELF']);
         // }
+    }
+
+    public function getLastId()
+    {
+        $result = $this->db->con->query("SELECT personal_id FROM `personaldata` ORDER BY personal_id DESC");
+        $lastid = $result->fetch_row();
+
+        return $lastid[0];
+
+        //return $;
     }
 }

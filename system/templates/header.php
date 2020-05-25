@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION['user'])) {
+    header('Location: ./pages/dashboard.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,10 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/app.css">
     <?php
-    session_start();
-    if (isset($_SESSION['user'])) {
-        header('Location: ./pages/dashboard.php');
-    }
+
     include('./functions.php');
     ?>
 </head>

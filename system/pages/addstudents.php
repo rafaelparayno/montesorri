@@ -2,7 +2,7 @@
 include('header.php');
 include('navigation.php');
 
-$lastid = $personal->getLastId() != "" ? $personal->getLastId()  : 0;
+$lastid = $personal->getLastId() != "" ? $personal->getLastId()  : 1;
 
 $sno = '2020-' . $lastid;
 

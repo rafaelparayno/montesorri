@@ -30,6 +30,29 @@ class FamilyData
         }
     }
 
+    public function editFamily(
+        $fn,
+        $fo,
+        $fcno,
+        $mn,
+        $mo,
+        $mcno,
+        $gname,
+        $gno,
+        $gadd,
+        $grel,
+        $sno
+    ) {
+
+        $sql = "UPDATE famdata SET fname = '{$fn}', fcno = '{$fcno}',fo='{$fo}', 
+        mname = '{$mn}' ,mcno = '{$mcno}', mo ='{$mo}', gname='{$gname}', gno ='{$gno}',
+        gadd = '{$gadd}',grel= '{$grel}' WHERE sno = '{$sno}'";
+
+        $result = $this->db->con->query($sql);
+        //echo $sql;
+        return $result;
+    }
+
     public function addFamily(
         $fn,
         $fo,
@@ -64,7 +87,17 @@ class FamilyData
         // if ($result) {
         //     header('Location:' . $_SERVER['PHP_SELF']);
         // }
-            return $result;
+        return $result;
+    }
 
+    public function getDatabySearching($condtion, $searchKey)
+    {
+        $result = $this->db->con->query("SELECT * FROM famdata WHERE {$condtion} = '{$searchKey}' ");
+
+        $result = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+
+
+        return $result;
     }
 }

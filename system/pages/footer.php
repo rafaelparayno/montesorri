@@ -75,6 +75,7 @@
         // This function will figure out which tab to display
         var x = document.getElementsByClassName("tab");
         var sub = document.getElementById("submitButtonAddStud");
+        var sub = document.getElementById("submitButtonEditStud");
         // Exit the function if any field in the current tab is invalid:
         if (n == 1 && !validateForm()) return false;
         // Hide the current tab:

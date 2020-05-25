@@ -3,13 +3,57 @@ include('header.php');
 include('navigation.php');
 $sno = $_GET['sid'];
 
-$studentinfo = $personal->getDatabySno('sno', $sno);
+$studentinfo = $personal->getDatabySearching('sno', $sno);
 
+$faminfo = $family->getDatabySearching('sno', $sno);
 
 if ($studentinfo == "" || $studentinfo == null) {
     header('Location: ./students.php');
 }
-print_r($studentinfo);
+
+
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST['editSubmit'])) {
+        $result =  $personal->updatePersonalData(
+            $_POST['FirstName'],
+            $_POST['LastName'],
+            $_POST['MiddleName'],
+            $_POST['Course'],
+            $_POST['Pob'],
+            $_POST['Dob'],
+            $_POST['Gender'],
+            $_POST['Civil'],
+            $_POST['Nat'],
+            $_POST['Address'],
+            $_POST['ContactNo'],
+            $_POST['email'],
+            $_POST['Rel'],
+            $_POST['age'],
+            $_POST['sno']
+        );
+
+        $result = $family->editFamily(
+            $_POST['Fname'],
+            $_POST['fo'],
+            $_POST['fcno'],
+            $_POST['mname'],
+            $_POST['mo'],
+            $_POST['mcno'],
+            $_POST['gname'],
+            $_POST['gno'],
+            $_POST['grel'],
+            $_POST['Fname'],
+            $_POST['sno']
+        );
+        // echo $result;
+        header('Location: ./students.php');
+    }
+    // $log = true;
+}
+
+
+
 
 ?>
 <main>
@@ -20,7 +64,7 @@ print_r($studentinfo);
         </ol>
 
         <div class="card mb-4">
-            <div class="card-header"><i class="fas fa-user mr-1"></i>Add Students
+            <div class="card-header"><i class="fas fa-user mr-1"></i>Edit Students
 
             </div>
             <p style="font-size: 16px" class='text-danger text-center mt-3'>Just Put N/a In the field if no info in that field</p>
@@ -112,57 +156,57 @@ print_r($studentinfo);
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="Fname">Father Name</label>
-                                    <input type="text" name="Fname" class="form-control" id="Fname">
+                                    <input type="text" value="<?= $faminfo['fname'] ?>" name="Fname" class="form-control" id="Fname">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="fo">Father Occupation</label>
-                                    <input type="text" name="fo" class="form-control" id="MiddleName">
+                                    <input type="text" value="<?= $faminfo['fo'] ?>" name="fo" class="form-control" id="MiddleName">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="fcno">Father's Contact Number</label>
-                                    <input type="text" name="fcno" class="form-control" id="fcno">
+                                    <input type="text" value="<?= $faminfo['fcno'] ?>" name="fcno" class="form-control" id="fcno">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="mname">Mother Name</label>
-                                    <input type="text" name="mname" class="form-control" id="mname">
+                                    <input type="text" value="<?= $faminfo['mname'] ?>" name="mname" class="form-control" id="mname">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="mo">Mother Occupation</label>
-                                    <input type="text" name="mo" class="form-control" id="MiddleName">
+                                    <input type="text" value="<?= $faminfo['mo'] ?>" name="mo" class="form-control" id="MiddleName">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="mcno">Mother's Contact Number</label>
-                                    <input type="text" name="mcno" class="form-control" id="mcno">
+                                    <input type="text" value="<?= $faminfo['mcno'] ?>" name="mcno" class="form-control" id="mcno">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="gname">Guardian's Name</label>
-                                    <input type="text" name="gname" class="form-control" id="mname">
+                                    <input type="text" value="<?= $faminfo['gname'] ?>" name="gname" class="form-control" id="mname">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="gno">Guardian Contact Number</label>
-                                    <input type="text" name="gno" class="form-control" id="MiddleName">
+                                    <input type="text" value="<?= $faminfo['gno'] ?>" name="gno" class="form-control" id="MiddleName">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="grel">Guardians's Rel</label>
-                                    <input type="text" name="grel" class="form-control" id="grel">
+                                    <input type="text" value="<?= $faminfo['grel'] ?>" name="grel" class="form-control" id="grel">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="gadd">Guardian's Address </label>
-                                <input type="text" name="gadd" class="form-control" id="gadd" placeholder="Guardian Address">
+                                <input type="text" value="<?= $faminfo['gadd'] ?>" name="gadd" class="form-control" id="gadd" placeholder="Guardian Address">
                             </div>
                         </div>
 
 
                         <div class="text-center">
                             <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary btn-lg px-5">Prev</button>
-                            <button id="submitButtonAddStud" type="button" name="addSubmit" id="nextBtn" class="btn btn-primary btn-lg px-5" onclick="nextPrev(1)">Next</button>
+                            <button id="submitButtonEditStud" type="button" name="editSubmit" id="nextBtn" class="btn btn-primary btn-lg px-5" onclick="nextPrev(1)">Next</button>
                         </div>
 
                     </form>
