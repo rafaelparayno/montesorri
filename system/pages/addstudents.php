@@ -23,12 +23,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             'dasdasd-123'
         );
 
-        $family->addToPersonal(
-            $_POST['']
-        )
+        $family->addFamily(
+            $_POST['Fname'],
+            $_POST['fo'],
+            $_POST['fcno'],
+            $_POST['mname'],
+            $_POST['mo'],
+            $_POST['mcno'],
+            $_POST['gname'],
+            $_POST['gno'],
+            $_POST['grel'],
+            $_POST['Fname'],
+            'dasdasd-123'
+        );
+
+        header('Location: ./students.php');
     }
-    // $log = true;
-}
+  
 
 ?>
 <main>
@@ -160,20 +171,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="gname">Guardian's Name</label>
-                                    <input type="text" class="form-control" id="mname">
+                                    <input type="text" name="gname" class="form-control" id="mname">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="gno">Guardian Contact Number</label>
-                                    <input type="text" class="form-control" id="MiddleName">
+                                    <input type="text" name="gno" class="form-control" id="MiddleName">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="grel">Guardians's Rel</label>
-                                    <input type="text" class="form-control" id="grel">
+                                    <input type="text" name="grel" class="form-control" id="grel">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="gadd">Guardian's Address </label>
-                                <input type="text" class="form-control" id="gadd" placeholder="Guardian Address">
+                                <input type="text" name="gadd" class="form-control" id="gadd" placeholder="Guardian Address">
                             </div>
                         </div>
 

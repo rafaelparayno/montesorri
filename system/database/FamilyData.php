@@ -49,7 +49,7 @@ class FamilyData
             'fname' => "'{$fn}'",
             'fcno' => "'{$fcno}'",
             'fo' => "'{$fo}'",
-            'maname' => "'{$mn}'",
+            'mname' => "'{$mn}'",
             'mcno' => "'{$mcno}'",
             'mo' => "'{$mo}'",
             'gname' => "'{$gname}'",
