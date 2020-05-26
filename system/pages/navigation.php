@@ -4,7 +4,7 @@ $role = $_SESSION['lvl'];
 
 ?>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="index.html">Montessori</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href=""><i class="fas fa-bars"></i></button><!-- Navbar Search-->
+    <a class="navbar-brand" href="#">Montessori</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href=""><i class="fas fa-bars"></i></button><!-- Navbar Search-->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         <div class="input-group">
             <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
@@ -42,7 +42,7 @@ $role = $_SESSION['lvl'];
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Students
                         </a>
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="./course.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Courses
                         </a>
@@ -54,7 +54,7 @@ $role = $_SESSION['lvl'];
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             School Year
                         </a>
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="./sem.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Semester
                         </a>

@@ -6,6 +6,7 @@ require('../database/PersonalData.php');
 require('../database/FamilyData.php');
 require('../database/SchoolYear.php');
 require('../database/Sem.php');
+require('../database/Course.php');
 require('../database/User.php');
 
 
@@ -16,3 +17,4 @@ $family = new FamilyData($db);
 
 $schoolYear = new SchoolYear($db);
 $sem = new Sem($db);
+$course = new Course($db);
