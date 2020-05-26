@@ -4,6 +4,7 @@ include('navigation.php');
 $sno = $_GET['sid'];
 
 $studentinfo = $personal->getDatabySearching('sno', $sno);
+$courseList = $course->getData();
 
 $faminfo = $family->getDatabySearching('sno', $sno);
 
@@ -46,10 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_POST['Fname'],
             $_POST['sno']
         );
-        // echo $result;
-        header('Location: ./students.php');
     }
-    // $log = true;
 }
 
 
@@ -97,7 +95,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             </div>
                             <div class="form-group">
                                 <label for="Course">Course</label>
-                                <input type="text" value="<?= $studentinfo['Course'] ?>" name="Course" class="form-control" id="Course" placeholder="Course">
+                                <select name="Course" class="form-control" id="exampleFormControlSelect1">
+
+                                    <?php array_map(function ($course) use ($studentinfo) { ?>
+                                        <option value="<?= $course['courses_id']  ?>" <?php
+                                                                                        $selected = $studentinfo['Course'] == $course['courses_id'] ? 'selected' : '';
+                                                                                        echo $selected;
+                                                                                        ?>>
+                                            <?= $course['coursesName'] . '-' . $course['coursesCode'] ?>
+                                        </option>
+                                    <?php }, $courseList) ?>
+                                </select>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-3">

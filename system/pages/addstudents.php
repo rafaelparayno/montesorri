@@ -2,6 +2,8 @@
 include('header.php');
 include('navigation.php');
 
+$courseList = $course->getData();
+
 $lastid = $personal->getLastId() != "" ? $personal->getLastId()  : 1;
 
 $sno = '2020-' . $lastid;
@@ -40,13 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_POST['Fname'],
             $_POST['sno']
         );
-
-        header('Location: ./students.php');
     }
     // $log = true;
-}
-
-?>
+} ?>
 <main>
     <div class="container-fluid">
         <h1 class="mt-4">Students</h1>
@@ -88,7 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             </div>
                             <div class="form-group">
                                 <label for="Course">Course</label>
-                                <input type="text" name="Course" class="form-control" id="Course" placeholder="Course">
+                                <select name="Course" class="form-control" id="exampleFormControlSelect1">
+
+                                    <?php array_map(function ($course) { ?>
+                                        <option value="<?= $course['courses_id'] ?>"><?= $course['coursesName'] . '-' . $course['coursesCode'] ?></option>
+                                    <?php }, $courseList) ?>
+                                </select>
+                                <!-- <input type="text" name="Course" class="form-control" id="Course" placeholder="Course"> -->
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-3">

@@ -1,7 +1,5 @@
 <?php
 $role = $_SESSION['lvl'];
-
-
 ?>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Montessori</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href=""><i class="fas fa-bars"></i></button><!-- Navbar Search-->
@@ -46,7 +44,7 @@ $role = $_SESSION['lvl'];
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Courses
                         </a>
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="./sections.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Section Offering
                         </a>

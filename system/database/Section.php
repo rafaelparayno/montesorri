@@ -1,0 +1,84 @@
+<?php
+
+class Section
+{
+
+    public $db = null;
+
+    public function __construct(DBController $db)
+    {
+        if (!isset($db->con)) return null;
+        $this->db = $db;
+    }
+
+    public function getData($syid, $semid)
+    {
+        $result = $this->db->con->query("SELECT section_id,section_name,coursesName,school_year,semterm FROM `sections` LEFT JOIN schoolyear ON sections.syid = schoolyear.sy_id 
+                                        LEFT JOIN sem ON sections.semid = sem.semid 
+                                        LEFT JOIN courses ON sections.course_id = courses.courses_id 
+                                        WHERE sections.syid = {$syid} AND sections.semid = {$semid}");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
+    public function insertData($params = null, $table = "sections")
+    {
+        if ($this->db->con != null) {
+            if ($params != null) {
+
+                $columns = implode(',', array_keys($params));
+                // print_r($columns);
+                $values = implode(',', array_values($params));
+                //   print_r($values);
+
+                $query_string = sprintf("INSERT INTO %s(%s) VALUES(%s)", $table, $columns, $values);
+
+
+                $result = $this->db->con->query($query_string);
+                return $result;
+            }
+        }
+    }
+
+    public function addSection(
+        $section_name,
+        $course_id,
+        $syid,
+        $semid
+    ) {
+
+        $params = array(
+            'section_name' => "'{$section_name}'",
+            'course_id ' =>  $course_id,
+            'syid' =>  $syid,
+            'semid' => $semid
+        );
+
+
+        $result = $this->insertData($params);
+
+        //   return $result;
+    }
+
+
+    // public function activateSem(
+    //     $syid,
+    //     $semid
+    // ) {
+    //     $sql = "UPDATE sem SET sem_status  ='disable' WHERE sem_status  = 'activate'";
+    //     $this->db->con->query($sql);
+
+    //     $sql = "UPDATE sem SET sem_status = 'activate' WHERE syid = {$syid} AND semid = {$semid} ";
+
+    //     $result = $this->db->con->query($sql);
+    //     //echo $sql;
+    //     return $result;
+    // }
+
+}

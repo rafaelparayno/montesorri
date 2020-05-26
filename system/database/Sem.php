@@ -24,6 +24,17 @@ class Sem
         return $resultArray;
     }
 
+
+    public function getSemActivate()
+    {
+        $result = $this->db->con->query("SELECT * FROM `sem` WHERE sem_status = 'activate'");
+        $sem = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+        return $sem;
+
+        //return $;
+    }
+
     public function insertData($params = null, $table = "sem")
     {
         if ($this->db->con != null) {
