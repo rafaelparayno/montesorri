@@ -54,6 +54,10 @@ $role = $_SESSION['lvl'];
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             School Year
                         </a>
+                        <a class="nav-link" href="">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Semester
+                        </a>
                     <?php
                     } else {
                     ?>

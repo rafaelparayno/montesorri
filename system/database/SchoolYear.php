@@ -24,6 +24,16 @@ class SchoolYear
         return $resultArray;
     }
 
+    public function schoolYear()
+    {
+        $result = $this->db->con->query("SELECT * FROM `schoolyear` WHERE sy_status = 'activate'");
+        $schoolYear = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+        return $schoolYear;
+
+        //return $;
+    }
+
 
     public function insertData($params = null, $table = "schoolyear")
     {
