@@ -16,7 +16,8 @@ if (isset($_POST['submitaddSub'])) {
     $subcode = $_POST['subcode'];
     $Course = $_POST['Course'];
     $subyr = $_POST['subyr'];
-    $subj->addSubjects($subname, $subcode, $subyr, $Course, $sy, $semid);
+    $subunit = $_POST['subunit'];
+    $subj->addSubjects($subname, $subcode, $subyr, $Course, $sy, $semid, $subunit);
     header('Location: ./subjects.php');
 }
 

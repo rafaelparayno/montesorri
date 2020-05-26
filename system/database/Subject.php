@@ -28,6 +28,19 @@ class Subject
         return $resultArray;
     }
 
+    public function getDataSearchFresh($syid, $semid, $courseid)
+    {
+        $result = $this->db->con->query("SELECT * FROM `subjectstbl` WHERE `syid` = {$syid} AND `semid` = {$semid} AND `course_id` = {$courseid} AND `subyr` = 1");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
     public function insertData($params = null, $table = "subjectstbl")
     {
         if ($this->db->con != null) {
@@ -53,7 +66,8 @@ class Subject
         $subjectyr,
         $course_id,
         $syid,
-        $semid
+        $semid,
+        $subunit
     ) {
 
         $params = array(
@@ -63,6 +77,7 @@ class Subject
             'course_id ' =>  $course_id,
             'syid' =>  $syid,
             'semid' => $semid,
+            'subject_units' => $subunit,
         );
 
 

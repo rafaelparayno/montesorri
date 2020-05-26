@@ -5,11 +5,34 @@ include('navigation.php');
 $schoolYearArgs = $schoolYear->schoolYear();
 $semList = $sem->getSemActivate();
 $courseList = $course->getData();
-
+//$course = 1;
 // $semList = $sem->getData();
 
 $syids = $schoolYearArgs['sy_id'];
-$subjectlist = $subject->getData($syids, $semList['semid'])
+$subjectlist = $subject->getData($syids, $semList['semid']);
+
+//$s = $subject->getDataSearchFresh($syids, $semList['semid'], $course);
+
+
+
+
+
+// $slist = "";
+// $slist = array_map(function ($subs) {
+//     return  $subs['subjectname'];
+// }, $s);
+
+// $subjectimplode = implode(',', array_values($slist));
+
+// $subjectexplode = explode(',', $subjectimplode);
+// $printSubj = "";
+// foreach ($subjectexplode as $item) {
+//     $printSubj .= $item . '\n';
+// }
+
+// echo nl2br($printSubj);
+
+
 
 ?>
 <main>
@@ -106,6 +129,10 @@ $subjectlist = $subject->getData($syids, $semList['semid'])
                         <div class="form-group">
                             <label for="subyr">Sub Year Level</label>
                             <input id="subyr" type="number" min="1" max="4" name="subyr" />
+                        </div>
+                        <div class="form-group">
+                            <label for="subunit">Subjects Units</label>
+                            <input id="subunit" type="number" min="1" max="5" name="subunit" />
                         </div>
                         <div class="form-group">
                             <label for="Course">Course</label>

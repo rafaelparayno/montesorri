@@ -24,6 +24,17 @@ class Course
         return $resultArray;
     }
 
+    public function getDatabySearching($condtion, $searchKey)
+    {
+        $result = $this->db->con->query("SELECT * FROM courses WHERE {$condtion} = '{$searchKey}' ");
+
+        $result = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+
+
+        return $result;
+    }
+
     public function insertData($params = null, $table = "courses")
     {
         if ($this->db->con != null) {
@@ -59,19 +70,4 @@ class Course
 
         //   return $result;
     }
-
-
-    // public function activateSem(
-    //     $syid,
-    //     $semid
-    // ) {
-    //     $sql = "UPDATE sem SET sem_status  ='disable' WHERE sem_status  = 'activate'";
-    //     $this->db->con->query($sql);
-
-    //     $sql = "UPDATE sem SET sem_status = 'activate' WHERE syid = {$syid} AND semid = {$semid} ";
-
-    //     $result = $this->db->con->query($sql);
-    //     //echo $sql;
-    //     return $result;
-    // }
 }
