@@ -46,7 +46,24 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script src="./js/app.js">
 </script>
+<script>
+    $('#password, #confirm_password').on('keyup', function() {
+        if ($('#password').val() == $('#confirm_password').val()) {
+            $('#message').html('Matching').css('color', 'green');
+            $('#buttonConfirm').removeAttr('disabled');
+        } else {
+            $('#message').html('Not Matching').css('color', 'red');
+            input.attr("disabled");
+        }
 
+        if (('#password').text().length > 5) {
+            $('#message2').html('Password Okay').css('color', 'green');
+        } else {
+            $('#message2').html('Password not Enough').css('color', 'red');
+        }
+
+    });
+</script>
 </body>
 
 </html>

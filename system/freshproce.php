@@ -32,6 +32,7 @@ include('./templates/navigationhome.php');
                     <li class="mb-4">&nbsp; *ALL CASH PAYMENTS SHALL BE ACCEPTED AT BANCO DE ORO ONLY BY TELLERS
                         OVER THE COUNTER
                         FOR MPC-BDO ACCOUNT NUMBER 44030443</li>
+                    <li class="mb-4">&nbsp; IF PAID VIA DIRECT BANK TRANSFER YOU CAN TAKE A PICTURE OF THE RECEIPT TO PROOF YOUR PAYMENT</li>
                     <li class="mb-4">&nbsp; if you have Have an Credit Card you can pay us over through PayPal</li>
                 </ol>
                 <a class="text-center btn btn-lg px-5 btn-primary" href="./admissionform.php">Go to our Form</a>

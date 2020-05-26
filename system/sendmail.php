@@ -11,6 +11,8 @@ require('./database/Course.php');
 require('./database/Subject.php');
 require('./database/Fee.php');
 
+require('./database/User.php');
+
 require './libraries/PHPMailer.php';
 require './libraries/SMTP.php';
 require './libraries/Exception.php';
@@ -27,8 +29,12 @@ $course = new Course($db);
 $subject = new Subject($db);
 $fee = new Fee($db);
 
+$user = new User($db);
+
+
 $mail = new PHPMailer(); // create a new object
 // print_r($personalData->getData());
+
 
 
 
@@ -110,6 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $tenPercent = $totalPayment * .10;
         $totalPaymentPercent = $totalPayment + $tenPercent;
+        $sno = $_POST['sno'];
+        $ead = $_POST['email'];
+
 
         $body =
             "<h2 style='text-align:center; padding: 0 200px;'>Hi, $firstname $lastname</h2>" .
@@ -148,7 +157,7 @@ please click the button below and confirm your e-mail address." .
                                         DOWNPAYMENT / MONTHLY      =    {$totalPaymentPercent}
 
             " . "</p>" .
-            "<a style='background-color: #4CAAD8; border: none; color: white; padding: 15px 32px; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;' href='localhost/mpc'>Confirm E-mail Address</a></b></br></br>"
+            "<a style='background-color: #4CAAD8; border: none; color: white; padding: 15px 32px; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;' href='localhost/mpc/system/userconfirm.php?id={$sno}&email={$ead}'>Confirm E-mail Address</a></b></br></br>"
 
             . " </div>"
 
@@ -182,7 +191,7 @@ please click the button below and confirm your e-mail address." .
             echo "Mailer Error: " . $mail->ErrorInfo;
         } else {
             echo "Message has been sent";
-            echo "<script>window.location='localhost/mpc';</script>";
+            echo "<script>window.location='/mpc';</script>";
         }
     }
 }
