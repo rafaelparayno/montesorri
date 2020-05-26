@@ -52,6 +52,10 @@ $role = $_SESSION['lvl'];
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Section Offering
                         </a>
+                        <a class="nav-link" href="./fees.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Fees
+                        </a>
                         <a class="nav-link" href="./schoolyear.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             School Year

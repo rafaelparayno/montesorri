@@ -11,79 +11,90 @@ class Fee
         $this->db = $db;
     }
 
-    // public function getData($syid, $semid)
-    // {
-    //     $result = $this->db->con->query("SELECT subject_id,subjectname,subjectcode,subyr,coursesName,school_year,semterm 
-    //                                     FROM `subjectstbl` LEFT JOIN schoolyear ON subjectstbl.syid = schoolyear.sy_id 
-    //                                     LEFT JOIN sem ON subjectstbl.semid = sem.semid 
-    //                                     LEFT JOIN courses ON subjectstbl.course_id = courses.courses_id   
-    //                                     WHERE subjectstbl.syid = {$syid} AND subjectstbl.semid = {$semid}");
+    public function getData($syid, $semid)
+    {
+        $result = $this->db->con->query("SELECT fee_id,tfPerUnits,misc,school_year,semterm 
+                                        FROM `fees` LEFT JOIN schoolyear ON fees.syid = schoolyear.sy_id 
+                                        LEFT JOIN sem ON fees.semid = sem.semid
+                                        WHERE fees.syid = {$syid} AND fees.semid = {$semid}");
 
-    //     $resultArray = array();
+        $items =  mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-    //     while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-    //         $resultArray[] = $item;
-    //     }
+        return $items;
+    }
 
-    //     return $resultArray;
-    // }
+    public function checkIfEmpty($syid, $semid)
+    {
+        $sql = "SELECT * FROM fees WHERE syid = {$syid} AND semid = {$semid}";
+        $result =  $this->db->con->query($sql);
 
-    // public function insertData($params = null, $table = "subjectstbl")
-    // {
-    //     if ($this->db->con != null) {
-    //         if ($params != null) {
+        $row = mysqli_num_rows($result);
 
-    //             $columns = implode(',', array_keys($params));
-    //             // print_r($columns);
-    //             $values = implode(',', array_values($params));
-    //             //   print_r($values);
+        if ($row > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-    //             $query_string = sprintf("INSERT INTO %s(%s) VALUES(%s)", $table, $columns, $values);
+    public function insertData($params = null, $table = "fees")
+    {
+        if ($this->db->con != null) {
+            if ($params != null) {
+
+                $columns = implode(',', array_keys($params));
+                // print_r($columns);
+                $values = implode(',', array_values($params));
+                //   print_r($values);
+
+                $query_string = sprintf("INSERT INTO %s(%s) VALUES(%s)", $table, $columns, $values);
+
+                $result = $this->db->con->query($query_string);
+                return $result;
+            }
+        }
+    }
+
+    public function editFamily(
+        $tf,
+        $msc,
+        $syid,
+        $semid
+    ) {
+
+        $sql = "UPDATE fees SET tfPerUnits = {$tf},misc = {$msc} WHERE syid = {$syid} AND semid = {$semid}";
+
+        $result = $this->db->con->query($sql);
+        //echo $sql;
+        return $result;
+    }
+
+    public function addfee(
+        $tfee,
+        $misc,
+        $syid,
+        $semid
+    ) {
+
+        $params = array(
+            'tfPerUnits' => $tfee,
+            'misc' =>  $misc,
+            'syid' =>  $syid,
+            'semid' => $semid
+        );
 
 
-    //             $result = $this->db->con->query($query_string);
-    //             return $result;
-    //         }
-    //     }
-    // }
+        $isEmpty = $this->checkIfEmpty($syid, $semid);
 
-    // public function addSubjects(
-    //     $subjectname,
-    //     $subjectcode,
-    //     $subjectyr,
-    //     $course_id,
-    //     $syid,
-    //     $semid
-    // ) {
-
-    //     $params = array(
-    //         'subjectname' => "'{$subjectname}'",
-    //         'subjectcode' => "'{$subjectcode}'",
-    //         'subyr' => $subjectyr,
-    //         'course_id ' =>  $course_id,
-    //         'syid' =>  $syid,
-    //         'semid' => $semid,
-    //     );
-
-
-    //     $result = $this->insertData($params);
-
-    //     //   return $result;
-    // }
-
-
-    // public function activateSem(
-    //     $syid,
-    //     $semid
-    // ) {
-    //     $sql = "UPDATE sem SET sem_status  ='disable' WHERE sem_status  = 'activate'";
-    //     $this->db->con->query($sql);
-
-    //     $sql = "UPDATE sem SET sem_status = 'activate' WHERE syid = {$syid} AND semid = {$semid} ";
-
-    //     $result = $this->db->con->query($sql);
-    //     //echo $sql;
-    //     return $result;
-    // }
-
+        if ($isEmpty) {
+            $result = $this->insertData($params);
+        } else {
+            $this->editFamily(
+                $tfee,
+                $misc,
+                $syid,
+                $semid
+            );
+        }
+    }
 }

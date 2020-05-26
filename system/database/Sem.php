@@ -13,7 +13,7 @@ class Sem
 
     public function getData()
     {
-        $result = $this->db->con->query("SELECT semid,semterm,school_year,sem_status FROM `sem` LEFT JOIN schoolyear ON sem.syid = schoolyear.sy_id");
+        $result = $this->db->con->query("SELECT semid,sem.syid,semterm,school_year,sem_status FROM `sem` LEFT JOIN schoolyear ON sem.syid = schoolyear.sy_id");
 
         $resultArray = array();
 
@@ -76,13 +76,13 @@ class Sem
         $syid,
         $semid
     ) {
-        $sql = "UPDATE sem SET sem_status  ='disable' WHERE sem_status  = 'activate'";
+        $sql = "UPDATE sem SET sem_status ='disable' WHERE sem_status = 'activate'";
         $this->db->con->query($sql);
 
-        $sql = "UPDATE sem SET sem_status = 'activate' WHERE syid = {$syid} AND semid = {$semid} ";
+        $sql = "UPDATE sem SET sem_status = 'activate' WHERE syid = {$syid} AND semid = {$semid}";
 
         $result = $this->db->con->query($sql);
-        //echo $sql;
+
         return $result;
     }
 }

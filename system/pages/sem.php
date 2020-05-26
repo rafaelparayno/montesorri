@@ -60,7 +60,7 @@ $syids = $schoolYearArgs['sy_id'];
 
                                     <td>
 
-                                        <a class="btn btn-block btn-info" href="./semFunction.php?semid=<?= $sem['semid'] . '&syid=' . $syids  ?>">Activate</a>
+                                        <a class="btn btn-block btn-info" href="./semFunction.php?semid=<?= $sem['semid'] . '&syid=' . $sem['syid']  ?>">Activate</a>
 
                                     </td>
                                 </tr>

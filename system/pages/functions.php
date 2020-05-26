@@ -10,6 +10,7 @@ require('../database/Section.php');
 require('../database/Course.php');
 require('../database/User.php');
 require('../database/Subject.php');
+require('../database/Fee.php');
 
 
 $db = new DBController();
@@ -22,3 +23,4 @@ $sem = new Sem($db);
 $course = new Course($db);
 $section = new Section($db);
 $subject = new Subject($db);
+$fee = new Fee($db);
