@@ -1,7 +1,6 @@
 <?php
 include('header.php');
 include('navigation.php');
-// $studentsList = $personal->getData();
 
 $schoolYearArgs = $schoolYear->schoolYear();
 $semList = $sem->getSemActivate();
@@ -10,23 +9,22 @@ $courseList = $course->getData();
 // $semList = $sem->getData();
 
 $syids = $schoolYearArgs['sy_id'];
+$subjectlist = $subject->getData($syids, $semList['semid'])
 
-
-$sectionList = $section->getData($syids, $semList['semid']);
 ?>
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Section</h1>
+        <h1 class="mt-4">Subjects</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Section</li>
+            <li class="breadcrumb-item active">Subjects</li>
         </ol>
 
         <div class="card mb-4">
-            <div class="card-header"><i class="fas fa-table mr-1"></i>Section
+            <div class="card-header"><i class="fas fa-table mr-1"></i>Subjects
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-3">
-                    <button class="btn btn-md btn-success" data-toggle="modal" data-target="#addModalSections">Add Section</button>
+                    <button class="btn btn-md btn-success" data-toggle="modal" data-target="#addModalSubjects">Add Subjects</button>
 
                 </div>
                 <div class="table-responsive">
@@ -35,9 +33,9 @@ $sectionList = $section->getData($syids, $semList['semid']);
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Section Name</th>
-                                <th>Section Year Level</th>
-                                <th>Course Name</th>
+                                <th>Subject Name</th>
+                                <th>Subject code</th>
+                                <th>Subject Yr</th>
                                 <th>Sem </th>
                                 <th>School Year</th>
                                 <th>Action</th>
@@ -47,9 +45,9 @@ $sectionList = $section->getData($syids, $semList['semid']);
                         <tfoot>
                             <tr>
                                 <th>Id</th>
-                                <th>Section Name</th>
-                                <th>Section Year Level</th>
-                                <th>Course Name</th>
+                                <th>Subject Name</th>
+                                <th>Subject code</th>
+                                <th>Subject Yr</th>
                                 <th>Sem </th>
                                 <th>School Year</th>
                                 <th>Action</th>
@@ -57,26 +55,26 @@ $sectionList = $section->getData($syids, $semList['semid']);
                         </tfoot>
                         <tbody>
 
-                            <?php array_map(function ($section) use ($syids) { ?>
+                            <?php array_map(function ($subject) use ($syids) { ?>
                                 <tr>
-                                    <td><?= $section['section_id'] ?></td>
-                                    <td><?= $section['section_name'] ?></td>
-                                    <td><?= $section['section_yr'] ?></td>
-                                    <td><?= $section['coursesName'] ?></td>
-                                    <td><?= $section['semterm'] ?></td>
-                                    <td><?= $section['school_year'] ?></td>
+                                    <td><?= $subject['subject_id'] ?></td>
+                                    <td><?= $subject['subjectname'] ?></td>
+                                    <td><?= $subject['subjectcode'] ?></td>
+                                    <td><?= $subject['coursesName'] ?></td>
+                                    <td><?= $subject['semterm'] ?></td>
+                                    <td><?= $subject['school_year'] ?></td>
 
 
 
 
                                     <td>
 
-                                        <!-- <a class="btn btn-block btn-info" href="./sectionFunction.php?sectionid=<?= $section['semid'] . '&syid=' . $syids  ?>">Edit</a> -->
+                                        <!-- <a class="btn btn-block btn-info" href="./subjectFunction.php?subjectid=<?= $subject['semid'] . '&syid=' . $syids  ?>">Edit</a> -->
                                         <a class="btn btn-block btn-info" href="">Edit</a>
 
                                     </td>
                                 </tr>
-                            <?php }, $sectionList) ?>
+                            <?php }, $subjectlist) ?>
 
 
                         </tbody>
@@ -86,24 +84,28 @@ $sectionList = $section->getData($syids, $semList['semid']);
         </div>
     </div>
 
-    <div id="addModalSections" class="modal fade" tabindex="-1" role="dialog">
+    <div id="addModalSubjects" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Sections</h5>
+                    <h5 class="modal-title">Add Subject</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="sectFunction.php" method="POST">
-                        <div class="form-group">
-                            <label for="sectname">Section Name</label>
-                            <input id="sectname" type="text" name="sectname" />
+                    <form action="subFunction.php" method="POST">
+                        <div class="form-row">
+                            <label for="subname">Subject Name</label>
+                            <input id="subname" type="text" name="subname" />
                         </div>
                         <div class="form-group">
-                            <label for="sectyr">Section Year Level</label>
-                            <input id="sectyr" type="number" min="1" max="4" name="sectyr" />
+                            <label for="subcode">Subject Code</label>
+                            <input id="subcode" type="text" name="subcode" />
+                        </div>
+                        <div class="form-group">
+                            <label for="subyr">Sub Year Level</label>
+                            <input id="subyr" type="number" min="1" max="4" name="subyr" />
                         </div>
                         <div class="form-group">
                             <label for="Course">Course</label>
@@ -127,7 +129,7 @@ $sectionList = $section->getData($syids, $semList['semid']);
                 <div class="modal-footer">
                     <input type="hidden" value="<?= $semList['semid'] ?>" name="semid" />
                     <input type="hidden" value="<?= $schoolYearArgs['sy_id'] ?>" name="syid" />
-                    <button type="Submit" name="submitaddSect" class="btn btn-primary">Save</button>
+                    <button type="Submit" name="submitaddSub" class="btn btn-primary">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
                     </form>

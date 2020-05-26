@@ -9,6 +9,7 @@ require('../database/Sem.php');
 require('../database/Section.php');
 require('../database/Course.php');
 require('../database/User.php');
+require('../database/Subject.php');
 
 
 $db = new DBController();
@@ -20,3 +21,4 @@ $schoolYear = new SchoolYear($db);
 $sem = new Sem($db);
 $course = new Course($db);
 $section = new Section($db);
+$subject = new Subject($db);

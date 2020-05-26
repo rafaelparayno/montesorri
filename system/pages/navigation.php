@@ -44,6 +44,10 @@ $role = $_SESSION['lvl'];
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Courses
                         </a>
+                        <a class="nav-link" href="./subjects.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Subjects
+                        </a>
                         <a class="nav-link" href="./sections.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Section Offering

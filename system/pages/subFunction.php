@@ -1,23 +1,23 @@
 <?php
 require('../database/DBController.php');
 
-require('../database/Section.php');
+require('../database/Subject.php');
 
 
 $db = new DBController();
 
-$sect = new Section($db);
+$subj = new Subject($db);
 
-if (isset($_POST['submitaddSect'])) {
+if (isset($_POST['submitaddSub'])) {
 
     $sy = $_POST['syid'];
     $semid = $_POST['semid'];
-    $sectname = $_POST['sectname'];
+    $subname = $_POST['subname'];
+    $subcode = $_POST['subcode'];
     $Course = $_POST['Course'];
-    $sectyr = $_POST['sectyr'];
-    $sect->addSection($sectname, $Course, $sy, $semid, $sectyr);
-
-    header('Location: ./sections.php');
+    $subyr = $_POST['subyr'];
+    $subj->addSubjects($subname, $subcode, $subyr, $Course, $sy, $semid);
+    header('Location: ./subjects.php');
 }
 
 // if (isset($_GET['syid']) || isset($_GET['semid'])) {

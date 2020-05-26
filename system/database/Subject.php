@@ -1,6 +1,6 @@
 <?php
 
-class Section
+class Subject
 {
 
     public $db = null;
@@ -13,10 +13,11 @@ class Section
 
     public function getData($syid, $semid)
     {
-        $result = $this->db->con->query("SELECT section_id,section_yr,section_name,coursesName,school_year,semterm FROM `sections` LEFT JOIN schoolyear ON sections.syid = schoolyear.sy_id 
-                                        LEFT JOIN sem ON sections.semid = sem.semid 
-                                        LEFT JOIN courses ON sections.course_id = courses.courses_id 
-                                        WHERE sections.syid = {$syid} AND sections.semid = {$semid}");
+        $result = $this->db->con->query("SELECT subject_id,subjectname,subjectcode,subyr,coursesName,school_year,semterm 
+                                        FROM `subjectstbl` LEFT JOIN schoolyear ON subjectstbl.syid = schoolyear.sy_id 
+                                        LEFT JOIN sem ON subjectstbl.semid = sem.semid 
+                                        LEFT JOIN courses ON subjectstbl.course_id = courses.courses_id   
+                                        WHERE subjectstbl.syid = {$syid} AND subjectstbl.semid = {$semid}");
 
         $resultArray = array();
 
@@ -27,7 +28,7 @@ class Section
         return $resultArray;
     }
 
-    public function insertData($params = null, $table = "sections")
+    public function insertData($params = null, $table = "subjectstbl")
     {
         if ($this->db->con != null) {
             if ($params != null) {
@@ -46,20 +47,22 @@ class Section
         }
     }
 
-    public function addSection(
-        $section_name,
+    public function addSubjects(
+        $subjectname,
+        $subjectcode,
+        $subjectyr,
         $course_id,
         $syid,
-        $semid,
-        $sect_yr
+        $semid
     ) {
 
         $params = array(
-            'section_name' => "'{$section_name}'",
+            'subjectname' => "'{$subjectname}'",
+            'subjectcode' => "'{$subjectcode}'",
+            'subyr' => $subjectyr,
             'course_id ' =>  $course_id,
             'syid' =>  $syid,
             'semid' => $semid,
-            'section_yr' => $sect_yr
         );
 
 
