@@ -197,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                         <div class="text-center">
                             <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary btn-lg px-5">Prev</button>
-                            <button id="submitButtonAddStud" type="button" name="addSubmit" id="nextBtn" class="btn btn-primary btn-lg px-5" onclick="nextPrev(1)">Next</button>
+                            <button type="button" name="addSubmit" id="nextBtn" class="btn btn-primary btn-lg px-5" onclick="nextPrev(1)">Next</button>
                         </div>
 
                     </form>

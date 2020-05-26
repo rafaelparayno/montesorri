@@ -1,16 +1,16 @@
 <?php
-
 require('../database/DBController.php');
 
 require('../database/PersonalData.php');
 require('../database/FamilyData.php');
-require('../database/SchoolYear.php');
-require('../database/User.php');
-
 
 $db = new DBController();
 
 $personal = new PersonalData($db);
 $family = new FamilyData($db);
 
-$schoolYear = new SchoolYear($db);
+$sno = $_GET['sno'];
+$personal->deleteData('sno', $sno);
+$family->deleteData('sno', $sno);
+
+header('Location: ./students.php');

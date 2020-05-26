@@ -30,6 +30,13 @@ class FamilyData
         }
     }
 
+    public function deleteData($condition, $key)
+    {
+        $result = $this->db->con->query("DELETE FROM famdata WHERE {$condition} = '{$key}' ");
+
+        return $result;
+    }
+
     public function editFamily(
         $fn,
         $fo,

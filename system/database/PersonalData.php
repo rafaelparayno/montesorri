@@ -24,6 +24,13 @@ class PersonalData
         return $resultArray;
     }
 
+    public function deleteData($condition, $key)
+    {
+        $result = $this->db->con->query("DELETE FROM personaldata WHERE {$condition} = '{$key}' ");
+
+        return $result;
+    }
+
     public function updatePersonalData(
         $firstname,
         $lastname,

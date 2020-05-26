@@ -74,8 +74,8 @@
     function nextPrev(n) {
         // This function will figure out which tab to display
         var x = document.getElementsByClassName("tab");
-        var sub = document.getElementById("submitButtonAddStud");
-        var sub = document.getElementById("submitButtonEditStud");
+        var sub = document.getElementById("nextBtn");
+        // var sub2 = document.getElementById("submitButtonEditStud");
         // Exit the function if any field in the current tab is invalid:
         if (n == 1 && !validateForm()) return false;
         // Hide the current tab:
@@ -86,8 +86,9 @@
         if (currentTab >= x.length) {
             //...the form gets submitted:
             sub.type = 'Submit';
-
+            // sub2.type = 'Submit';
             document.getElementById("regForm").submit();
+            document.getElementById("regForm2").submit();
 
         }
         // Otherwise, display the correct tab:
@@ -125,6 +126,17 @@
         //... and adds the "active" class to the current step:
         x[n].className += " active";
     }
+
+
+    //multi form
+
+
+    //Deleting..
+    // function deleteItem() {
+
+    // }
+
+    //deleting
 </script>
 </body>
 

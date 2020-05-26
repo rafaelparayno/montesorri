@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <p style="font-size: 16px" class='text-danger text-center mt-3'>Just Put N/a In the field if no info in that field</p>
             <div class="card-body">
                 <div class="container">
-                    <form id="regForm" method="POST">
+                    <form id="regForm2" method="POST">
                         <div style="text-align:center">
                             <span class="step"></span>
                             <span class="step"></span>
@@ -206,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                         <div class="text-center">
                             <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary btn-lg px-5">Prev</button>
-                            <button id="submitButtonEditStud" type="button" name="editSubmit" id="nextBtn" class="btn btn-primary btn-lg px-5" onclick="nextPrev(1)">Next</button>
+                            <button type="button" name="editSubmit" id="nextBtn" class="btn btn-primary btn-lg px-5" onclick="nextPrev(1)">Next</button>
                         </div>
 
                     </form>
