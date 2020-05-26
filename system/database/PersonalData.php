@@ -104,7 +104,8 @@ class PersonalData
         $eadd,
         $rel,
         $age,
-        $sno
+        $sno,
+        $isE
 
     ) {
 
@@ -123,7 +124,8 @@ class PersonalData
             'EmailAdd' => "'{$eadd}'",
             'Religion' => "'{$rel}'",
             'age' => $age,
-            'sno' => "'{$sno}'"
+            'sno' => "'{$sno}'",
+            'isEnrolled' =>   $isE
         );
 
         $result = $this->insertData($params);

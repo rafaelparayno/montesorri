@@ -26,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_POST['email'],
             $_POST['Rel'],
             $_POST['age'],
-            $_POST['sno']
+            $_POST['sno'],
+            1
         );
 
         $result = $family->addFamily(
