@@ -86,4 +86,25 @@ class Sem
 
         return $result;
     }
+
+
+    public function openCloseRegistration(
+        $syid,
+        $semid,
+        $isOpen
+    ) {
+
+
+        $sql = "";
+
+        if ($isOpen == 1) {
+            $sql = "UPDATE sem SET isOpenReg = 0 WHERE syid = {$syid} AND semid = {$semid}";
+        } else {
+            $sql = "UPDATE sem SET isOpenReg = 1 WHERE syid = {$syid} AND semid = {$semid}";
+        }
+
+        $result = $this->db->con->query($sql);
+
+        return $result;
+    }
 }

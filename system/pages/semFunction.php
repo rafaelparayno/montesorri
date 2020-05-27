@@ -17,6 +17,16 @@ if (isset($_POST['submitaddSem'])) {
     header('Location: ./sem.php');
 }
 
+
+if (isset($_GET['syid']) && isset($_GET['semid']) && isset($_GET['isOpen'])) {
+    $syid = $_GET['syid'];
+    $semid = $_GET['semid'];
+    $isOpen = $_GET['isOpen'];
+    $sem->openCloseRegistration($syid, $semid, $isOpen);
+    header('Location: ./sem.php');
+}
+
+
 if (isset($_GET['syid']) || isset($_GET['semid'])) {
     $syid = $_GET['syid'];
     $semid = $_GET['semid'];

@@ -6,9 +6,10 @@ include('navigation.php');
 $schoolYearArgs = $schoolYear->schoolYear();
 
 $semList = $sem->getData();
-
+$semids = $sem->getSemActivate();
 $syids = $schoolYearArgs['sy_id'];
-
+$smid = $semids['semid'];
+echo ''
 ?>
 <main>
     <div class="container-fluid">
@@ -22,6 +23,11 @@ $syids = $schoolYearArgs['sy_id'];
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-3">
+
+                    <h3 class="mx-auto">Registration Status: <?php echo $semids['isOpenReg'] == 1 ? "Open" : "Close" ?> </h3>
+
+                    <a class="btn text-white btn-md btn-primary mr-2" href="./semFunction.php?semid=<?= $smid . '&syid=' . $syids . '&isOpen=0'   ?>">Open Registration Schedule</a>
+                    <a class="btn text-white btn-md btn-danger mr-2" href="./semFunction.php?semid=<?= $smid . '&syid=' . $syids . '&isOpen=1'   ?>">Close Registration</a>
                     <button class="btn btn-md btn-success" data-toggle="modal" data-target="#addModalSem">Add School Sem</button>
 
                 </div>
