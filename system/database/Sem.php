@@ -62,7 +62,8 @@ class Sem
         $params = array(
             'semterm' => $semterm,
             'syid ' => $syid,
-            'sem_status' => "'disable'"
+            'sem_status' => "'disable'",
+            'isOpenReg' =>  0
         );
 
 

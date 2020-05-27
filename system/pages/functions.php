@@ -11,6 +11,7 @@ require('../database/Course.php');
 require('../database/User.php');
 require('../database/Subject.php');
 require('../database/Fee.php');
+require('../database/Studentsinfo.php');
 
 
 $db = new DBController();
@@ -24,3 +25,4 @@ $course = new Course($db);
 $section = new Section($db);
 $subject = new Subject($db);
 $fee = new Fee($db);
+$studentsinfo = new Studentsinfo($db);
