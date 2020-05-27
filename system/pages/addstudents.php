@@ -4,6 +4,7 @@ include('navigation.php');
 
 $courseList = $course->getData();
 
+
 $lastid = $personal->getLastId() != "" ? $personal->getLastId()  : 1;
 
 $sno = '2020-' . $lastid;
@@ -11,6 +12,8 @@ $sno = '2020-' . $lastid;
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['addSubmit'])) {
+        $schoolYearArgs = $schoolYear->schoolYear();
+        $semList = $sem->getSemActivate();
         $personal->addToPersonal(
             $_POST['FirstName'],
             $_POST['LastName'],
@@ -27,7 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_POST['Rel'],
             $_POST['age'],
             $_POST['sno'],
-            1
+            1,
+            $schoolYearArgs['sy_id'],
+            $semList['semid']
         );
 
         $result = $family->addFamily(

@@ -182,7 +182,7 @@ please click the button below and confirm your e-mail address." .
         $mail->Port = 465; // or 587
         $mail->IsHTML(true);
         $mail->Username = "inventory.noreply23@gmail.com";
-        $mail->Password = "okucdsrykkvbcksk";
+        $mail->Password = "frnizinrjutxjfyl";
         $mail->SetFrom("inventory.noreply23@gmail.com");
         $mail->Subject = "Confirm Email and Check Tuition Fee for Downpayment for specific Course";
         $mail->Body = $body;

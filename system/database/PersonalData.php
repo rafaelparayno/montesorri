@@ -24,6 +24,19 @@ class PersonalData
         return $resultArray;
     }
 
+    public function getDataWithSemSyid($semid, $syid)
+    {
+        $result = $this->db->con->query("SELECT * FROM personaldata WHERE semid = {$semid} AND syid = {$syid}");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
     public function deleteData($condition, $key)
     {
         $result = $this->db->con->query("DELETE FROM personaldata WHERE {$condition} = '{$key}' ");
@@ -80,7 +93,7 @@ class PersonalData
                 //   print_r($values);
 
                 $query_string = sprintf("INSERT INTO %s(%s) VALUES(%s)", $table, $columns, $values);
-
+                // echo $query_string;
                 $result = $this->db->con->query($query_string);
                 return $result;
             }
@@ -105,7 +118,9 @@ class PersonalData
         $rel,
         $age,
         $sno,
-        $isE
+        $isE,
+        $syid,
+        $semid
 
     ) {
 
@@ -125,7 +140,9 @@ class PersonalData
             'Religion' => "'{$rel}'",
             'age' => $age,
             'sno' => "'{$sno}'",
-            'isEnrolled' =>   $isE
+            'isEnrolled' =>   $isE,
+            'semid' =>        $semid,
+            'syid' =>   $syid
         );
 
         $result = $this->insertData($params);

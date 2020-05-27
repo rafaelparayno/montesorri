@@ -1,16 +1,20 @@
 <?php
 include('header.php');
 include('navigation.php');
-$studentsList = $personal->getData();
+
+
+$schoolYearArgs = $schoolYear->schoolYear();
+$semList = $sem->getSemActivate();
+$studentsList = $personal->getDataWithSemSyid($semList['semid'], $schoolYearArgs['sy_id']);
 
 
 
 ?>
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Students Enrolled</h1>
+        <h1 class="mt-4">Students Enrolled in <?= $semList['semterm'] ?> Term SY <?= $schoolYearArgs['school_year'] ?></h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Students Enrolled</li>
+            <li class="breadcrumb-item active">Students</li>
         </ol>
 
         <div class="card mb-4">

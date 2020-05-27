@@ -77,13 +77,13 @@
                         }
 
                         if (val.section_yr == 2) {
-                            $('#ul2ndyears').append('<li>' + val.section_name + '</li>')
+                            $('#ul2ndyears').append('<li>' + val.section_name + '</li><a class="btn btn-sm btn-primary" href="#">View Subjects</a>')
                         }
                         if (val.section_yr == 3) {
-                            $('#ul3rdyears').append('<li>' + val.section_name + '</li>')
+                            $('#ul3rdyears').append('<li>' + val.section_name + '</li><a class="btn btn-sm btn-primary" href="#">View Subjects</a>')
                         }
                         if (val.section_yr == 4) {
-                            $('#ul4thyears').append('<li>' + val.section_name + '</li>')
+                            $('#ul4thyears').append('<li>' + val.section_name + '</li><a class="btn btn-sm btn-primary" href="#">View Subjects</a>')
                         }
 
                     }
@@ -174,26 +174,6 @@
         //... and adds the "active" class to the current step:
         x[n].className += " active";
     }
-
-
-    // $(document).ready(function() {
-
-    // });
-
-
-    // function changeCoursesCombo(){
-
-    // }
-    // $.ajax({
-    //     uri: "Students/ajax.php",
-    //     type: "post",
-    //     data: {
-    //         courseid : $(this).data("id"),
-    //         success: function(result) {
-    //             console.log($result);
-    //         }
-    //     }
-    // })
 </script>
 </body>
 
