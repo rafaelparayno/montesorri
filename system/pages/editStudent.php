@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_POST['Fname'],
             $_POST['sno']
         );
+        echo "<script>window.location='/mpc/system/pages/students.php';</script>";
     }
 }
 

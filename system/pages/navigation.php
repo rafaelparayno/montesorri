@@ -68,10 +68,14 @@ $role = $_SESSION['lvl'];
                     } else {
                     ?>
                         <a class="nav-link" href="">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
                             Message
                         </a>
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="./StudentProfile.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            profile
+                        </a>
+                        <a class="nav-link" href="./sectionoffering.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Section Offering
                         </a>

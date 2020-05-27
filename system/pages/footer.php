@@ -12,7 +12,7 @@
 </footer>
 </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
@@ -45,6 +45,54 @@
     //data table
     $(document).ready(function() {
         $('#dataTable').DataTable();
+
+
+        $('select#courseselect').change(function(e) {
+            var selectedcourse = $(this).children("option:selected").val();
+            // var firstyears = $('#ul1styears');
+            // var secondyears = $('#ul2ndyears');
+            // var thirdyears = $('#ul3rdyears');
+            // var fourthyears = $('#ul4thyears');
+
+
+            $.ajax({
+                type: "post",
+                url: "Students/ajax.php",
+                data: {
+                    coursesid: selectedcourse,
+                },
+                success: function(data) {
+
+                    $('#ul1styears').empty();
+                    $('#ul2ndyears').empty();
+                    $('#ul3rdyears').empty();
+                    $('#ul4thyears').empty();
+
+                    var obj = jQuery.parseJSON(data);
+
+                    for (var key in obj) {
+                        var val = obj[key];
+                        if (val.section_yr == 1) {
+                            $('#ul1styears').append('<li>' + val.section_name + '</li><a class="btn btn-sm btn-primary" href="#">View Subjects</a>')
+                        }
+
+                        if (val.section_yr == 2) {
+                            $('#ul2ndyears').append('<li>' + val.section_name + '</li>')
+                        }
+                        if (val.section_yr == 3) {
+                            $('#ul3rdyears').append('<li>' + val.section_name + '</li>')
+                        }
+                        if (val.section_yr == 4) {
+                            $('#ul4thyears').append('<li>' + val.section_name + '</li>')
+                        }
+
+                    }
+
+                }
+            });
+
+
+        });
     });
     //dataTable
 
@@ -128,15 +176,24 @@
     }
 
 
-    //multi form
+    // $(document).ready(function() {
+
+    // });
 
 
-    //Deleting..
-    // function deleteItem() {
+    // function changeCoursesCombo(){
 
     // }
-
-    //deleting
+    // $.ajax({
+    //     uri: "Students/ajax.php",
+    //     type: "post",
+    //     data: {
+    //         courseid : $(this).data("id"),
+    //         success: function(result) {
+    //             console.log($result);
+    //         }
+    //     }
+    // })
 </script>
 </body>
 

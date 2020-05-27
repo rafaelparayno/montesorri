@@ -27,6 +27,22 @@ class Section
         return $resultArray;
     }
 
+    public function getDataSearchCourse($syid, $semid, $course_id)
+    {
+        $result = $this->db->con->query("SELECT section_id,section_yr,section_name,coursesName,school_year,semterm FROM `sections` LEFT JOIN schoolyear ON sections.syid = schoolyear.sy_id 
+                                        LEFT JOIN sem ON sections.semid = sem.semid 
+                                        LEFT JOIN courses ON sections.course_id = courses.courses_id 
+                                        WHERE sections.syid = {$syid} AND sections.semid = {$semid} AND sections.course_id = {$course_id} ");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
     public function insertData($params = null, $table = "sections")
     {
         if ($this->db->con != null) {
