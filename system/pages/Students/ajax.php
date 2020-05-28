@@ -9,6 +9,7 @@ require('./../../database/Section.php');
 require('./../../database/Course.php');
 require('./../../database/Subject.php');
 require('./../../database/PersonalData.php');
+require('./../../database/User.php');
 
 $db = new DBController();
 
@@ -16,6 +17,8 @@ $section = new Section($db);
 $sem = new Sem($db);
 $schoolYear = new SchoolYear($db);
 $personal = new PersonalData($db);
+
+$user = new User($db);
 
 if (isset($_POST['coursesid'])) {
     $schoolYearArgs = $schoolYear->schoolYear();
@@ -41,5 +44,12 @@ if (isset($_POST['studentSno'])) {
 
 
     $results = $personal->getDatabySearching('sno', $_POST['studentSno']);
+    echo json_encode($results);
+}
+
+if (isset($_POST['toMessage'])) {
+    $userRole = $_POST['userole'];
+    $results = $user->getDataSearchLike($_POST['toMessage'], $userRole);
+    // $results = 
     echo json_encode($results);
 }

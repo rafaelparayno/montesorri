@@ -18,9 +18,14 @@
 
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-
+<script src="//cdn.ckeditor.com/4.5.5/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('textMessage');
+</script>
 <script>
     //Slider
+
+
 
     (function($) {
         "use strict";
@@ -41,7 +46,17 @@
     })(jQuery);
     //Slider
 
+    function fill(Value, sid) {
 
+        //Assigning value to "search" div in "search.php" file.
+        $('#receiverId').val(sid);
+        $('#toSender').val(Value);
+        $('#divdis').hide();
+        //Hiding "display" div in "search.php" file.
+
+        $('#displayUsersAdmin').hide();
+
+    }
     //data table
     $(document).ready(function() {
         $('#dataTable').DataTable();
@@ -198,6 +213,45 @@
             $(e.currentTarget).find('input[name="useridModalReset"]').val(userid);
         });
         //modalResetPassword
+
+
+
+        //ajax for to Message//
+        $('#search').keyup(function(e) {
+            var searchKeys = $(this).val();
+            var role = $('#userRoleMessage').val();
+
+
+            // alert(role);
+            $.ajax({
+                type: "post",
+                url: "Students/ajax.php",
+                data: {
+                    toMessage: searchKeys,
+                    userole: role,
+                },
+                success: function(data) {
+                    var obj = jQuery.parseJSON(data);
+
+                    $("#displayUsersAdmin").empty();
+                    for (var key in obj) {
+                        var val = obj[key];
+
+                        // $("#displayUsersAdmin").append('<p onclick="fill(\'' + val.username + '\')">' + val.username + '</p>');
+                        $("#displayUsersAdmin").append(`<p onclick="fill('${val.username}','${val.acc_id}')">${val.username}</p>`);
+
+                    }
+
+                    // $('#sectionsSelect').change();
+                }
+
+            });
+
+
+        });
+
+
+        //ajax for to Message//
 
 
     });

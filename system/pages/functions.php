@@ -12,6 +12,7 @@ require('../database/User.php');
 require('../database/Subject.php');
 require('../database/Fee.php');
 require('../database/Studentsinfo.php');
+require('../database/Message.php');
 
 
 $db = new DBController();
@@ -27,3 +28,4 @@ $subject = new Subject($db);
 $fee = new Fee($db);
 $studentsinfo = new Studentsinfo($db);
 $users = new User($db);
+$message = new Message($db);

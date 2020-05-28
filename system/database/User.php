@@ -30,13 +30,28 @@ class User
 
     public function getDataSearch($condition, $searckey)
     {
-        $result = $this->db->con->query("SELECT * FROM studentsinfo WHERE {$condition} = '$searckey'");
+        $result = $this->db->con->query("SELECT * FROM users WHERE {$condition} = '$searckey'");
 
         $result = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
         return $result;
     }
 
+    public function getDataSearchLike($keys, $us)
+    {
+
+        $sql =  "SELECT * FROM users WHERE username LIKE '%{$keys}%' and `userole` = {$us}";
+
+        $result = $this->db->con->query($sql);
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
 
     public function confirmUser($sno, $ead, $password)
     {
@@ -151,4 +166,12 @@ class User
 
         return $args;
     }
+
+    // private function get_pwd_from_useradmin($username, $userole)
+    // {
+    //     $result = $this->db->con->query("SELECT * FROM users WHERE username = '{$username}' AND userole = {$userole} ");
+    //     $args = mysqli_fetch_array($result);
+
+    //     return $args;
+    // }
 }
