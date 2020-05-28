@@ -1,0 +1,14 @@
+{
+
+    "name": "xorn/mpc",
+    "authors": [
+        {
+            "name": "rafael",
+            "email": "rafaelllparaynooo23@gmail.com"
+        }
+    ],
+    "require": {
+        "phpunit/php-timer": "^3.1",
+        "paypal/rest-api-sdk-php": "*"
+    }
+}

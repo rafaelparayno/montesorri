@@ -51,7 +51,8 @@ $courseName = $course->getDatabySearching('courses_id', $personal['Course']);
                     <?php if ($semyr['isOpenReg'] == 0) { ?>
                         <h2 class="text-warning">Registration is not yet Open</h2>
                     <?php } else { ?>
-                        <a class="btn btn-block btn-info" href="#">Register</a>
+                        <button class="btn btn-block btn-info" data-toggle="modal" data-target="#RegModal">Register</button>
+                        <!-- href="./ViewPayment.php?sno=<?= $sno  ?>" -->
                     <?php }
 
                     ?>
@@ -60,5 +61,24 @@ $courseName = $course->getDatabySearching('courses_id', $personal['Course']);
 
         </div>
     </div>
+
+    <div id="RegModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registration Details and Payment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="paypal/CreatePayment.php">
+                        <button name="ConfirmButtonPay" type="submit">Confirm Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </main>
