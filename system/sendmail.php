@@ -58,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_POST['Rel'],
             $_POST['age'],
             $_POST['sno'],
+            0,
+            0,
             0
         );
 

@@ -35,52 +35,48 @@ class Studentsinfo
         return $result;
     }
 
-    // public function confirmUser($sno, $ead, $password)
-    // {
+    public function addStudentsInfo(
+        $sno,
+        $sect,
+        $yr,
+        $units,
+        $statusStud,
+        $evalStatus
+    ) {
+
+        $params = array(
+            'sno' => "'{$sno}'",
+            'sect_enrolled' => $sect,
+            'year_level' => $yr,
+            'allowed_units ' =>  $units,
+            'status_student' =>  $statusStud,
+            'eval_status' => $evalStatus
+
+        );
 
 
-    //     $crppypass =  password_hash($password, PASSWORD_DEFAULT);
-
-    //     $params = array(
-    //         'username' => "'{$ead}'",
-    //         'password' => "'{$crppypass}'",
-    //         'userole' => 2,
-    //         'acc_id' => "'{$sno}'",
-    //     );
+        $result = $this->insertData($params);
+    }
 
 
-    //     $result = $this->insertData($params);
-    //     if ($result) {
-    //         $_SESSION['user'] = $ead;
-    //         $_SESSION['id'] = $sno;
-    //         $_SESSION['lvl'] = 2;
+    public function insertData($params = null, $table = "studentsinfo")
+    {
+        if ($this->db->con != null) {
+            if ($params != null) {
+
+                $columns = implode(',', array_keys($params));
+                // print_r($columns);
+                $values = implode(',', array_values($params));
+                //   print_r($values);
+
+                $query_string = sprintf("INSERT INTO %s(%s) VALUES(%s)", $table, $columns, $values);
 
 
-
-    //         // header("Location:" . $_SERVER['PHP_SELF']);
-    //         header("Location:" . './pages/dashboard.php');
-    //     }
-    // }
-
-
-    // public function insertData($params = null, $table = "users")
-    // {
-    //     if ($this->db->con != null) {
-    //         if ($params != null) {
-
-    //             $columns = implode(',', array_keys($params));
-    //             // print_r($columns);
-    //             $values = implode(',', array_values($params));
-    //             //   print_r($values);
-
-    //             $query_string = sprintf("INSERT INTO %s(%s) VALUES(%s)", $table, $columns, $values);
-
-
-    //             $result = $this->db->con->query($query_string);
-    //             return $result;
-    //         }
-    //     }
-    // }
+                $result = $this->db->con->query($query_string);
+                return $result;
+            }
+        }
+    }
 
 
     // public function login($username, $password)

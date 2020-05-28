@@ -24,3 +24,13 @@ if (isset($_POST['coursesid'])) {
     $results = $section->getDataSearchCourse($syids, $semList['semid'], $_POST['coursesid']);
     echo json_encode($results);
 }
+
+if (isset($_POST['sectionyr'])) {
+    $schoolYearArgs = $schoolYear->schoolYear();
+    $semList = $sem->getSemActivate();
+
+    $syids = $schoolYearArgs['sy_id'];
+
+    $results = $section->getDataSearchYearlvl($syids, $semList['semid'], $_POST['sectionyr']);
+    echo json_encode($results);
+}

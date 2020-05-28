@@ -47,6 +47,9 @@
         $('#dataTable').DataTable();
 
 
+
+        //for selection of courses
+
         $('select#courseselect').change(function(e) {
             var selectedcourse = $(this).children("option:selected").val();
             // var firstyears = $('#ul1styears');
@@ -93,6 +96,46 @@
 
 
         });
+        //for selection of courses
+        $('select#yearLevelSelect').change(function(e) {
+            var selectedYr = $(this).children("option:selected").val();
+
+
+
+            $.ajax({
+                type: "post",
+                url: "Students/ajax.php",
+                data: {
+                    sectionyr: selectedYr,
+                },
+                success: function(data) {
+                    var obj = jQuery.parseJSON(data);
+                    $("#sectionsSelect").empty();
+                    for (var key in obj) {
+                        var val = obj[key];
+
+                        $("#sectionsSelect").append('<option value=' + val.section_id + '>' + val.section_name + '</option>');
+                        $("#sectionsSelect").removeAttr('disabled');
+                    }
+
+                    $('#sectionsSelect').change();
+                }
+
+            });
+
+
+        });
+
+        $('select#studType').change(function(e) {
+            var val = $(this).children("option:selected").val();
+            $('#unitsDiv').toggle();
+
+
+        });
+
+
+
+
     });
     //dataTable
 

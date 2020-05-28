@@ -87,6 +87,7 @@ $studentsList = $personal->getDataWithSemSyid($semList['semid'], $schoolYearArgs
                                     <td><a class="btn btn-block btn-primary" href="./editStudent.php?sid=<?= $student['sno'] ?>">Edit</a>
 
                                         <a class="btn btn-block btn-danger" href="./deleteStudent.php?sno=<?= $student['sno'] ?>">Delete</a>
+                                        <a class="btn btn-block btn-info" href="./evaluation.php?sno=<?= $student['sno'] ?>">Evaluate</a>
                                     </td>
                                 </tr>
                             <?php }, $studentsList) ?>

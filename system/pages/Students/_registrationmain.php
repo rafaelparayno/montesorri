@@ -48,7 +48,13 @@ $courseName = $course->getDatabySearching('courses_id', $personal['Course']);
                     <?= $semyr['semterm'] ?>
                     <hr />
                     <br />
-                    <h2 class="text-warning">Registration is not yet Open</h2>
+                    <?php if ($semyr['isOpenReg'] == 0) { ?>
+                        <h2 class="text-warning">Registration is not yet Open</h2>
+                    <?php } else { ?>
+                        <a class="btn btn-block btn-info" href="#">Register</a>
+                    <?php }
+
+                    ?>
                 </div>
             </div>
 

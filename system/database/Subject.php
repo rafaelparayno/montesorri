@@ -87,6 +87,19 @@ class Subject
     }
 
 
+    public function returnUnitsForCourse($cid, $ylvl, $semid, $syid)
+    {
+        $result = $this->db->con->query("SELECT * FROM `subjectstbl` WHERE `syid` = {$syid} AND `semid` = {$semid} AND `course_id` = {$cid} AND `subyr` = {$ylvl}");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
     // public function activateSem(
     //     $syid,
     //     $semid

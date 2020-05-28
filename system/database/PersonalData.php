@@ -26,7 +26,7 @@ class PersonalData
 
     public function getDataWithSemSyid($semid, $syid)
     {
-        $result = $this->db->con->query("SELECT * FROM personaldata WHERE semid = {$semid} AND syid = {$syid}");
+        $result = $this->db->con->query("SELECT * FROM personaldata WHERE semid = {$semid} AND syid = {$syid} AND isEnrolled = 1");
 
         $resultArray = array();
 
@@ -142,7 +142,6 @@ class PersonalData
             'sno' => "'{$sno}'",
             'isEnrolled' =>   $isE,
             'semid' =>        $semid,
-            'syid' =>   $syid
         );
 
         $result = $this->insertData($params);

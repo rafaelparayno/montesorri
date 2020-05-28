@@ -71,7 +71,7 @@ class User
             // print_r($args);
             $passwordfromdb = $args['password'];
 
-            echo $passwordfromdb;
+
             if (password_verify($password, $passwordfromdb)) {
 
                 $_SESSION['user'] = $username;
