@@ -157,6 +157,7 @@ class PersonalData
             'sno' => "'{$sno}'",
             'isEnrolled' =>   $isE,
             'semid' =>        $semid,
+            'syid' => $syid
         );
 
         $result = $this->insertData($params);
