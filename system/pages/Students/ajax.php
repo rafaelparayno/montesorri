@@ -8,12 +8,14 @@ require('./../../database/Sem.php');
 require('./../../database/Section.php');
 require('./../../database/Course.php');
 require('./../../database/Subject.php');
+require('./../../database/PersonalData.php');
 
 $db = new DBController();
 
 $section = new Section($db);
 $sem = new Sem($db);
 $schoolYear = new SchoolYear($db);
+$personal = new PersonalData($db);
 
 if (isset($_POST['coursesid'])) {
     $schoolYearArgs = $schoolYear->schoolYear();
@@ -32,5 +34,12 @@ if (isset($_POST['sectionyr'])) {
     $syids = $schoolYearArgs['sy_id'];
 
     $results = $section->getDataSearchYearlvl($syids, $semList['semid'], $_POST['sectionyr']);
+    echo json_encode($results);
+}
+
+if (isset($_POST['studentSno'])) {
+
+
+    $results = $personal->getDatabySearching('sno', $_POST['studentSno']);
     echo json_encode($results);
 }

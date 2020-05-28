@@ -24,6 +24,21 @@ class PersonalData
         return $resultArray;
     }
 
+    public function getDataRawQuery($sql)
+    {
+        $result = $this->db->con->query($sql);
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+        //   SELECT * FROM `personaldata` WHERE sno NOT in (SELECT acc_id FROM users)
+    }
+
+
     public function getDataWithSemSyid($semid, $syid)
     {
         $result = $this->db->con->query("SELECT * FROM personaldata WHERE semid = {$semid} AND syid = {$syid} AND isEnrolled = 1");

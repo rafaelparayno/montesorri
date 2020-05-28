@@ -26,3 +26,4 @@ $section = new Section($db);
 $subject = new Subject($db);
 $fee = new Fee($db);
 $studentsinfo = new Studentsinfo($db);
+$users = new User($db);

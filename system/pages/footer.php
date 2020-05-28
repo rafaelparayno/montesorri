@@ -96,6 +96,9 @@
 
 
         });
+
+
+
         //for selection of courses
         $('select#yearLevelSelect').change(function(e) {
             var selectedYr = $(this).children("option:selected").val();
@@ -133,7 +136,68 @@
 
         });
 
+        //for selectiong sno in student users
+        $('select#snoStudentSelect').change(function(e) {
+            var selectedSno = $(this).children("option:selected").val();
 
+
+
+            $.ajax({
+                type: "post",
+                url: "Students/ajax.php",
+                data: {
+                    studentSno: selectedSno,
+                },
+                success: function(data) {
+                    var obj = jQuery.parseJSON(data);
+                    // for (var key in obj) {
+                    //     var val = obj[key];
+
+                    //     $('#studentUsername').val(val.EmailAdd);
+                    //     console.log(val.)
+                    // }
+                    $('#studentuser').val(obj['EmailAdd']);
+                    console.log(obj['EmailAdd']);
+
+                }
+
+            });
+
+
+        });
+
+        //for selectiong sno in student users
+
+        //generating password
+        $('#generatePass').on('click', () => {
+            var passwordGenerated = generatedChars(8);
+            // alert(passwordGenerated);
+
+            $('#generatedPass').val(passwordGenerated);
+        });
+        $('#generatePass2').on('click', () => {
+            var passwordGenerated = generatedChars(8);
+            // alert(passwordGenerated);
+
+            $('#generatedPassAdmin').val(passwordGenerated);
+        });
+        //generating password
+        function generatedChars(length) {
+            var result = '';
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for (var i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+
+        //modalResetPassword
+        $('#resetPassword').on('show.bs.modal', function(e) {
+            var userid = $(e.relatedTarget).data('userid');
+            $(e.currentTarget).find('input[name="useridModalReset"]').val(userid);
+        });
+        //modalResetPassword
 
 
     });

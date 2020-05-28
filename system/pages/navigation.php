@@ -36,6 +36,10 @@ $role = $_SESSION['lvl'];
                     <?php
                     if ($role == 1) {
                     ?>
+                        <a class="nav-link" href="./users.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            Users
+                        </a>
                         <a class="nav-link" href="./students.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Students

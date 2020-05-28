@@ -12,6 +12,32 @@ class User
     }
 
 
+
+
+
+    public function getData($table = 'users')
+    {
+        $result = $this->db->con->query("SELECT * FROM {$table} WHERE username  != 'admin'");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
+    public function getDataSearch($condition, $searckey)
+    {
+        $result = $this->db->con->query("SELECT * FROM studentsinfo WHERE {$condition} = '$searckey'");
+
+        $result = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+        return $result;
+    }
+
+
     public function confirmUser($sno, $ead, $password)
     {
 
@@ -39,6 +65,24 @@ class User
         }
     }
 
+    public function addToUsers($accid, $username, $role, $password)
+    {
+
+        $crppypass =  password_hash($password, PASSWORD_DEFAULT);
+        $params = array(
+            'username' => "'{$username}'",
+            'password' => "'{$crppypass}'",
+            'userole' => $role,
+            'acc_id' => "'{$accid}'",
+        );
+
+        $result = $this->insertData($params);
+        // if ($result) {
+
+        //     //header("Location:" . './pages/users.php');
+        // }
+    }
+
 
     public function insertData($params = null, $table = "users")
     {
@@ -52,7 +96,7 @@ class User
 
                 $query_string = sprintf("INSERT INTO %s(%s) VALUES(%s)", $table, $columns, $values);
 
-
+                //    echo $query_string;
                 $result = $this->db->con->query($query_string);
                 return $result;
             }
@@ -80,6 +124,24 @@ class User
                 header("Location:" . './pages/dashboard.php');
             }
         }
+    }
+
+    public function resetPassword($userid)
+    {
+        $seed = str_split('abcdefghijklmnopqrstuvwxyz'
+            . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            . '0123456789'); // and any other characters
+        shuffle($seed); // probably optional since array_is randomized; this may be redundant
+        $rand = '';
+        foreach (array_rand($seed, 8) as $k) $rand .= $seed[$k];
+        $crppypass =  password_hash($rand, PASSWORD_DEFAULT);
+
+        $sql = "UPDATE users SET password = '{$crppypass}' WHERE user_id = {$userid}";
+
+        $this->db->con->query($sql);
+        //   echo $sql;
+        // echo $rand . ' ' . $crppypass;
+        return $rand;
     }
 
     private function get_pwd_from_info($username)
