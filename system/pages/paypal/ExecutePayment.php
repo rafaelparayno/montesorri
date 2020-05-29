@@ -44,12 +44,12 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
     $amount = new Amount();
     $details = new Details();
 
-    $details->setShipping(2.2)
-        ->setTax(1.3)
-        ->setSubtotal(17.50);
+    $details->setShipping(0)
+        ->setTax(0)
+        ->setSubtotal(13000);
 
-    $amount->setCurrency('USD');
-    $amount->setTotal(21);
+    $amount->setCurrency('PHP');
+    $amount->setTotal(13000);
     $amount->setDetails($details);
     $transaction->setAmount($amount);
 

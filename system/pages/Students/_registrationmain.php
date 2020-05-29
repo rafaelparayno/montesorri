@@ -73,7 +73,21 @@ $courseName = $course->getDatabySearching('courses_id', $personal['Course']);
                 </div>
                 <div class="modal-body">
                     <form method="post" action="paypal/CreatePayment.php">
-                        <button name="ConfirmButtonPay" type="submit">Confirm Payment</button>
+
+                        <div class="text-center">
+
+                            <label class="d-block">Tf per units * 500</label>
+                            <input type="hidden" name="tf">
+                            <input type="hidden" name="misc">
+                            <input type="hidden" name="total">
+                            <label>Misc 4000</label>
+
+                            <label class="d-block" l>Total 21000</label>
+
+                        </div>
+                        <button class="btn btn-block btn-primary" name="ConfirmButtonPay" type="submit">Confirm Payment</button>
+
+
                     </form>
                 </div>
             </div>

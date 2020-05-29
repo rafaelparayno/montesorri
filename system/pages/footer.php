@@ -91,17 +91,17 @@
                     for (var key in obj) {
                         var val = obj[key];
                         if (val.section_yr == 1) {
-                            $('#ul1styears').append('<li>' + val.section_name + '</li><a class="btn btn-sm btn-primary" href="#">View Subjects</a>')
+                            $('#ul1styears').append('<li>' + val.section_name + `</li><a class="btn btn-sm btn-primary" href="./studentSubject.php?lvl=1&cid=${selectedcourse}">View Subjects</a>`)
                         }
 
                         if (val.section_yr == 2) {
-                            $('#ul2ndyears').append('<li>' + val.section_name + '</li><a class="btn btn-sm btn-primary" href="#">View Subjects</a>')
+                            $('#ul2ndyears').append('<li>' + val.section_name + `</li><a class="btn btn-sm btn-primary" href="./studentSubject.php?lvl=2&cid=${selectedcourse}">View Subjects</a>`)
                         }
                         if (val.section_yr == 3) {
-                            $('#ul3rdyears').append('<li>' + val.section_name + '</li><a class="btn btn-sm btn-primary" href="#">View Subjects</a>')
+                            $('#ul3rdyears').append('<li>' + val.section_name + `</li><a class="btn btn-sm btn-primary" href="./studentSubject.php?lvl=3&cid=${selectedcourse}">View Subjects</a>`)
                         }
                         if (val.section_yr == 4) {
-                            $('#ul4thyears').append('<li>' + val.section_name + '</li><a class="btn btn-sm btn-primary" href="#">View Subjects</a>')
+                            $('#ul4thyears').append('<li>' + val.section_name + `</li><a class="btn btn-sm btn-primary" href="./studentSubject.php?lvl=4&cid=${selectedcourse}">View Subjects</a>`)
                         }
 
                     }

@@ -33,29 +33,29 @@ if (isset($_POST['ConfirmButtonPay'])) {
     // $itemList = new ItemList();
     // $itemList->setItems(array($item1, $item2));
     $item1 = new Item();
-    $item1->setName('Ground Coffee 40 oz')
-        ->setCurrency('USD')
+    $item1->setName('Tution Fee')
+        ->setCurrency('PHP')
         ->setQuantity(1)
         ->setSku("123123") // Similar to `item_number` in Classic API
-        ->setPrice(7.5);
+        ->setPrice(9000);
     $item2 = new Item();
-    $item2->setName('Granola bars')
-        ->setCurrency('USD')
-        ->setQuantity(5)
+    $item2->setName('Misc Fee')
+        ->setCurrency('PHP')
+        ->setQuantity(1)
         ->setSku("321321") // Similar to `item_number` in Classic API
-        ->setPrice(2);
+        ->setPrice(4000);
 
     $itemList = new ItemList();
     $itemList->setItems(array($item1, $item2));
 
     $details = new Details();
-    $details->setShipping(1.2)
-        ->setTax(1.3)
-        ->setSubtotal(17.50);
+    $details->setShipping(0)
+        ->setTax(0)
+        ->setSubtotal(13000);
 
     $amount = new Amount();
-    $amount->setCurrency("USD")
-        ->setTotal(20)
+    $amount->setCurrency("PHP")
+        ->setTotal(13000)
         ->setDetails($details);
 
     // $amount = new Amount();
@@ -65,7 +65,7 @@ if (isset($_POST['ConfirmButtonPay'])) {
     $transaction = new Transaction();
     $transaction->setAmount($amount)
         ->setItemList($itemList)
-        ->setDescription("Payment description")
+        ->setDescription("Tuition fee for Montesorri")
         ->setInvoiceNumber(uniqid());
 
     // $transaction = new Transaction();
@@ -94,5 +94,5 @@ if (isset($_POST['ConfirmButtonPay'])) {
 
     $approvalUrl = $payment->getApprovalLink();
     //return $payment;
-    echo "<a href='{$approvalUrl}'>Go to link</a>";
+    echo "<div class='text-center border p-5 bg-dark'><a href='{$approvalUrl}'>Go to link</a></div>";
 }
