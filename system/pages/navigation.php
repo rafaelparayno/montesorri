@@ -40,10 +40,24 @@ $role = $_SESSION['lvl'];
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Users
                         </a>
-                        <a class="nav-link" href="./students.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStudents" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Students
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
+                        <div class="collapse" id="collapseStudents" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="./students.php">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                    Students Enrolled
+                                </a>
+                                <a class="nav-link" href="#">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                    Students Pending
+                                </a>
+                            </nav>
+                        </div>
+
                         <a class="nav-link" href="./course.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Courses
@@ -51,6 +65,10 @@ $role = $_SESSION['lvl'];
                         <a class="nav-link" href="./subjects.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Subjects
+                        </a>
+                        <a class="nav-link" href="./accounts.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Accounts
                         </a>
                         <a class="nav-link" href="./sections.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>

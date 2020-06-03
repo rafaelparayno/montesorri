@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $courseArgs = $course->getDatabySearching('courses_id', $_POST['Course']);
         $courseName = $courseArgs['coursesName'];
 
-        $fees = $fee->getData($syids, $semList['semid']);
+        $fees = $fee->getData($syids, $semList['semid'], 1);
         $tfPerUnit = (float) $fees['tfPerUnits'];
         $misc = (float) $fees['misc'];
 

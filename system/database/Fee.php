@@ -11,21 +11,21 @@ class Fee
         $this->db = $db;
     }
 
-    public function getData($syid, $semid)
+    public function getData($syid, $semid, $yrlvl)
     {
         $result = $this->db->con->query("SELECT fee_id,tfPerUnits,misc,school_year,semterm 
                                         FROM `fees` LEFT JOIN schoolyear ON fees.syid = schoolyear.sy_id 
                                         LEFT JOIN sem ON fees.semid = sem.semid
-                                        WHERE fees.syid = {$syid} AND fees.semid = {$semid}");
+                                        WHERE fees.syid = {$syid} AND fees.semid = {$semid} AND fees.lvl = {$yrlvl}");
 
         $items =  mysqli_fetch_array($result, MYSQLI_ASSOC);
 
         return $items;
     }
 
-    public function checkIfEmpty($syid, $semid)
+    public function checkIfEmpty($syid, $semid, $lvl)
     {
-        $sql = "SELECT * FROM fees WHERE syid = {$syid} AND semid = {$semid}";
+        $sql = "SELECT * FROM fees WHERE syid = {$syid} AND semid = {$semid} AND lvl = {$lvl}";
         $result =  $this->db->con->query($sql);
 
         $row = mysqli_num_rows($result);
@@ -55,14 +55,15 @@ class Fee
         }
     }
 
-    public function editFamily(
+    public function editFees(
         $tf,
         $msc,
         $syid,
-        $semid
+        $semid,
+        $lvl
     ) {
 
-        $sql = "UPDATE fees SET tfPerUnits = {$tf},misc = {$msc} WHERE syid = {$syid} AND semid = {$semid}";
+        $sql = "UPDATE fees SET tfPerUnits = {$tf},misc = {$msc} WHERE syid = {$syid} AND semid = {$semid} AND lvl = {$lvl}";
 
         $result = $this->db->con->query($sql);
         //echo $sql;
@@ -73,27 +74,30 @@ class Fee
         $tfee,
         $misc,
         $syid,
-        $semid
+        $semid,
+        $lvl
     ) {
 
         $params = array(
             'tfPerUnits' => $tfee,
             'misc' =>  $misc,
             'syid' =>  $syid,
-            'semid' => $semid
+            'semid' => $semid,
+            'lvl' => $lvl
         );
 
 
-        $isEmpty = $this->checkIfEmpty($syid, $semid);
+        $isEmpty = $this->checkIfEmpty($syid, $semid, $lvl);
 
         if ($isEmpty) {
             $result = $this->insertData($params);
         } else {
-            $this->editFamily(
+            $this->editFees(
                 $tfee,
                 $misc,
                 $syid,
-                $semid
+                $semid,
+                $lvl
             );
         }
     }
