@@ -41,17 +41,17 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
     $execution->setPayerId($_GET['PayerID']);
 
     $transaction = new Transaction();
-    $amount = new Amount();
-    $details = new Details();
+    // $amount = new Amount();
+    // $details = new Details();
 
-    $details->setShipping(0)
-        ->setTax(0)
-        ->setSubtotal(13000);
+    // $details->setShipping(0)
+    //     ->setTax(0)
+    //     ->setSubtotal(13000);
 
-    $amount->setCurrency('PHP');
-    $amount->setTotal(13000);
-    $amount->setDetails($details);
-    $transaction->setAmount($amount);
+    // $amount->setCurrency('PHP');
+    // $amount->setTotal(13000);
+    // $amount->setDetails($details);
+    // $transaction->setAmount($amount);
 
     $execution->addTransaction($transaction);
 

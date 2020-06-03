@@ -62,6 +62,23 @@
         $('#dataTable').DataTable();
 
 
+        //Registration toggling..
+        $('input[name=payments]:radio').click(function() {
+            var inputValue = $(this).attr("value");
+
+            if (inputValue === "fullRadio") {
+                $('#reg-full').show();
+                $('#reg-down').hide();
+            } else {
+                $('#reg-full').hide();
+                $('#reg-down').show();
+            }
+
+        });
+
+
+        //Registration toggling..
+
 
         //for selection of courses
 

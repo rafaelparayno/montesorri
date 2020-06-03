@@ -48,18 +48,3 @@ if (isset($_POST['subtmidTf_3'])) {
     $fee->addfee($tf, $misc, $sy, $semid, $lvl);
     header('Location: ./fees.php');
 }
-
-
-if (isset($_POST['subtmidTf_4'])) {
-
-    $tf = $_POST['perUnits4'];
-    $misc = $_POST['misc4'];
-    $sy = $_POST['syid'];
-    $semid = $_POST['semid'];
-
-    $lvl = $_POST['yrlvl4'];
-
-    $fee->addfee($tf, $misc, $sy, $semid, $lvl);
-    header('Location: ./fees.php');
-    // echo '4';
-}

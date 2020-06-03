@@ -65,7 +65,7 @@ $fees_4 = $fee->getdata($schoolYearArgs['sy_id'], $semList['semid'], 4);
 
                             </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                            <div class="col-lg-12 col-md-12 col-sm-12 mb-2">
                                 <div class="card p-5">
                                     <div class="card-header">
                                         <h4 class="text-center">3rd Year Student</h4>
@@ -85,25 +85,7 @@ $fees_4 = $fee->getdata($schoolYearArgs['sy_id'], $semList['semid'], 4);
                                 </div>
 
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
-                                <div class="card p-5">
-                                    <div class="card-header">
-                                        <h4 class="text-center">4th Year Student</h4>
-                                    </div>
-                                    <div class="form-group">
 
-                                        <input type="hidden" value="4" name="yrlvl4" />
-                                        <label for="Per Units">Tuition fee per Units</label>
-                                        <input type="number" min="0" value="<?= (float) $fees_4['tfPerUnits'] ?>" name="perUnits4" class="form-control" id="perUnits" require />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="misc">Miscelaneous</label>
-                                        <input type="number" min="0" value="<?= (float) $fees_4['misc'] ?>" name="misc4" class="form-control" id="misc">
-                                    </div>
-                                    <button type="submit" name="subtmidTf_4" class="btn btn-primary btn-block">Save</button>
-                                </div>
-
-                            </div>
                         </div>
 
 

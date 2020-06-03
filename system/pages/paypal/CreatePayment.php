@@ -1,6 +1,6 @@
 <?php
 
-require  './context.php';
+require  'paypal/context.php';
 
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -13,66 +13,48 @@ use PayPal\Api\Transaction;
 
 
 
-if (isset($_POST['ConfirmButtonPay'])) {
+if (isset($_POST['ConfirmButtonFullPay'])) {
     $url = 'http://localhost/mpc/system/pages/paypal/ExecutePayment.php?success=';
 
     $payer = new Payer();
     $payer->setPaymentMethod("paypal");
-
-    // $item1 = new Item();
-    // $item1->setName('Tuition Fee * 19 units = 9500')
-    //     ->setCurrency('PHP')
-    //     ->setPrice(9500);
+    $totalTf = $_POST['totalTf'];
+    $misc = $_POST['misc'];
+    $totalPay = $_POST['totalPay'];
 
 
-    // $item2 = new Item();
-    // $item2->setName('Misc Fee  = 4000')
-    //     ->setCurrency('PHP')
-    //     ->setPrice(4000);
-
-    // $itemList = new ItemList();
-    // $itemList->setItems(array($item1, $item2));
     $item1 = new Item();
-    $item1->setName('Tution Fee')
+    $item1->setName('Tuition Fee')
         ->setCurrency('PHP')
         ->setQuantity(1)
-        ->setSku("123123") // Similar to `item_number` in Classic API
-        ->setPrice(9000);
+        ->setPrice($totalTf);
+
     $item2 = new Item();
     $item2->setName('Misc Fee')
         ->setCurrency('PHP')
         ->setQuantity(1)
-        ->setSku("321321") // Similar to `item_number` in Classic API
-        ->setPrice(4000);
+
+        ->setPrice($misc);
 
     $itemList = new ItemList();
     $itemList->setItems(array($item1, $item2));
 
     $details = new Details();
-    $details->setShipping(0)
-        ->setTax(0)
-        ->setSubtotal(13000);
+    $details->setSubtotal($totalPay);
 
     $amount = new Amount();
     $amount->setCurrency("PHP")
-        ->setTotal(13000)
+        ->setTotal($totalPay)
         ->setDetails($details);
 
-    // $amount = new Amount();
-    // $amount->setCurrency("PHP")
-    //     ->setTotal(13500);
+
+
 
     $transaction = new Transaction();
     $transaction->setAmount($amount)
         ->setItemList($itemList)
         ->setDescription("Tuition fee for Montesorri")
         ->setInvoiceNumber(uniqid());
-
-    // $transaction = new Transaction();
-    // $transaction->setAmount($amount)
-    //     ->setItemList($itemList)
-    //     ->setDescription("Payment description")
-    //     ->setInvoiceNumber(uniqid());
 
 
     $redirectUrls = new RedirectUrls();
@@ -94,5 +76,93 @@ if (isset($_POST['ConfirmButtonPay'])) {
 
     $approvalUrl = $payment->getApprovalLink();
     //return $payment;
-    echo "<div class='text-center border p-5 bg-dark'><a href='{$approvalUrl}'>Go to link</a></div>";
+    $link =  "<a class='btn btn-info btn-block' href='{$approvalUrl}'>Go to Paypal</a>";
 }
+
+
+
+if (isset($_POST['ConfirmButtonDownPay'])) {
+    $url = 'http://localhost/mpc/system/pages/paypal/ExecutePayment.php?success=';
+
+    $payer = new Payer();
+    $payer->setPaymentMethod("paypal");
+    $down = $_POST['downpayment'];
+    $totalTf = $_POST['totalTf'];
+    $misc = $_POST['misc'];
+
+    $item1 = new Item();
+    $item1->setName('Down Payment')
+        ->setCurrency('PHP')
+        ->setQuantity(1)
+        ->setPrice($down);
+
+
+    $itemList = new ItemList();
+    $itemList->setItems(array($item1));
+
+    $details = new Details();
+    $details->setSubtotal($down);
+
+    $amount = new Amount();
+    $amount->setCurrency("PHP")
+        ->setTotal($down)
+        ->setDetails($details);
+
+
+
+
+    $transaction = new Transaction();
+    $transaction->setAmount($amount)
+        ->setItemList($itemList)
+        ->setDescription("Tuition fee for Montesorri")
+        ->setInvoiceNumber(uniqid());
+
+
+    $redirectUrls = new RedirectUrls();
+    $redirectUrls->setReturnUrl($url . 'true')
+        ->setCancelUrl($url . 'false');
+
+
+    $payment = new Payment();
+    $payment->setIntent("sale")
+        ->setPayer($payer)
+        ->setRedirectUrls($redirectUrls)
+        ->setTransactions(array($transaction));
+
+    // echo 'wew';
+    $request = clone $payment;
+
+    $payment->create($apiContext);
+
+
+    $approvalUrl = $payment->getApprovalLink();
+    //return $payment;
+    $link =  "<a class='btn btn-info btn-block' href='{$approvalUrl}'>Go to Paypal</a>";
+}
+
+
+
+?>
+
+<main style="height: 100vh">
+
+    <div class="container">
+
+        <div style="height:100vh; display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <h2><?php echo isset($_POST['ConfirmButtonDownPay']) ? 'Down Payment' : 'Full Payment' ?></h2>
+            <p>Total Tuition Fee: <?= $totalTf ?> </p>
+            <p>Misc: <?= $misc ?> </p>
+            <?php if (isset($_POST['ConfirmButtonDownPay'])) {
+            ?>
+                <p>Total Payment: <?= $_POST['totalPayDown'] ?> </p>
+                <p>Down Payment/Month: <?= $_POST['downpayment'] ?></p>
+            <?php } else {
+            ?>
+                <p>Total Payment: <?= $totalPay ?> </p>
+            <?php } ?>
+
+            <?= $link ?>
+        </div>
+
+    </div>
+</main>

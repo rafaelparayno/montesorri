@@ -6,7 +6,7 @@ $studentinfo = $personal->getDatabySearching('sno', $sno);
 $courseList = $course->getData();
 
 $faminfo = $family->getDatabySearching('sno', $sno);
-
+//print_r($studentinfo);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['editStudentProfile'])) {
