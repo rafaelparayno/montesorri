@@ -2,11 +2,12 @@
 include('./templates/header.php');
 include('./templates/navigationhome.php');
 
-$courses = $course->getData();
+$strands = $strand->getData();
 
-$lastid = $personalData->getLastId() != "" ? $personalData->getLastId()  : 1;
+$lastid = $shspersonal->getLastId() != "" ? $shspersonal->getLastId()  : 1;
 
-$sno = '2020-' . $lastid;
+$sno = 'shs-2020-' . $lastid;
+
 
 ?>
 
@@ -14,7 +15,7 @@ $sno = '2020-' . $lastid;
 <main>
 
     <div class="container-fluid">
-        <form action="sendmail.php" class="m-5" method="POST">
+        <form action="sendmail2.php" class="m-5" method="POST">
             <p style="font-size: 16px" class='text-danger text-center mt-3'>Just Put N/a In the field if no info in that field</p>
 
             <h2 class="text-center">Student Basic Info</h2>
@@ -34,12 +35,12 @@ $sno = '2020-' . $lastid;
                 </div>
             </div>
             <div class="form-group">
-                <label for="Course">Course</label>
-                <select name="Course" class="form-control" id="exampleFormControlSelect1">
+                <label for="strand">Senior High Program/Strands</label>
+                <select name="strand" class="form-control" id="exampleFormControlSelect1">
 
-                    <?php array_map(function ($course) { ?>
-                        <option value="<?= $course['courses_id'] ?>"><?= $course['coursesName'] . '-' . $course['coursesCode'] ?></option>
-                    <?php }, $courses) ?>
+                    <?php array_map(function ($strand) { ?>
+                        <option value="<?= $strand['strand_id'] ?>"><?= $strand['strand_name'] . '-' . $strand['strandcode'] ?></option>
+                    <?php }, $strands) ?>
                 </select>
                 <!-- <input require type="text" name="Course" class="form-control" id="Course" placeholder="Course"> -->
             </div>
@@ -149,7 +150,7 @@ $sno = '2020-' . $lastid;
 
             <div class="text-center">
 
-                <button type="submit" name="addSubmit" id="nextBtn" class="btn btn-primary py-3 btn-block">Save</button>
+                <button type="submit" name="addSubmitShs" id="nextBtn" class="btn btn-primary py-3 btn-block">Save</button>
             </div>
 
         </form>

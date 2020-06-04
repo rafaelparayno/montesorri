@@ -35,11 +35,6 @@ $user = new User($db);
 $mail = new PHPMailer(); // create a new object
 // print_r($personalData->getData());
 
-
-
-
-
-
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['addSubmit'])) {
         $personalData->addToPersonal(

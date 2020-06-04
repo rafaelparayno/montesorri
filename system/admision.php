@@ -23,10 +23,19 @@ include('./templates/navigationhome.php');
 
                 <h2>REQUIREMENTS NEEDED TO COMPLY</h2>
                 <div class="row">
+
+                    <div class="col-md-12 border-top p-5">
+                        <h2>For Senior High School Student</h2>
+                        <p class="text-justify">
+                            1. Form 138 ( High School Card)/ SF9-JHS (Learner's Progress Report Card)<br />
+                            2. Form 137 ( Transcript of Records from High School)/ SF10-JHS(Learner's Permanent Academic Record)<br />
+                            3. PSA issued Birth Certificate<br />
+                        </p>
+                    </div>
                     <div class="col-md-6 border-top p-5">
                         <h2>FOR REGULAR STUDENTS/ FRESHMAN</h2>
                         <p class="text-justify">
-                            1Form 138 ( High School Card)<br />
+                            1. Form 138 ( High School Card)<br />
                             2. Form 137 ( Transcript of Records from High School)<br />
                             3. Good moral<br />
                             4. NSO Birth Certificate<br />
@@ -46,7 +55,6 @@ include('./templates/navigationhome.php');
                             6. Ojt Evaluation- for graduating only<br />
                         </p>
                     </div>
-
                 </div>
 
                 <h2>ADMISSION PROCEDURES</h2>
@@ -54,11 +62,22 @@ include('./templates/navigationhome.php');
             </div>
             <div class="row mx-2">
 
+                <div class="col-md-12 mt-3">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">Senior HighSchool</h5>
+                            <p class="card-text">Applicants are those who completed Junior High School Making them Elibigble to Apply For Shs</p>
+                            <a href="./admissionShs.php"" class=" btn btn-primary">Apply Online</a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-md-6 border-top pt-3">
                     <div class="card">
 
                         <div class="card-body">
-                            <h5 class="card-title text-warning">Freshmen Students</h5>
+                            <h5 class="card-title text-warning">College Freshmen Students</h5>
                             <p class="card-text">Freshmen applicants are those who have completed middle school
                                 (senior high) making
                                 them
@@ -81,6 +100,8 @@ include('./templates/navigationhome.php');
                     </div>
 
                 </div>
+
+
             </div>
         </div>
     </section>
