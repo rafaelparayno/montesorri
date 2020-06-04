@@ -48,7 +48,7 @@ class Account
 
 
 
-    public function insertData($params = null, $table = "sem")
+    public function insertData($params = null, $table = "accounts")
     {
         if ($this->db->con != null) {
             if ($params != null) {
@@ -65,5 +65,29 @@ class Account
                 return $result;
             }
         }
+    }
+
+    public function addAccounts(
+        $syid,
+        $semid,
+        $sno,
+        $mode,
+        $Totalbal,
+        $totalPay,
+        $RemBal
+    ) {
+
+        $params = array(
+            'syid' => $syid,
+            'semid' => $semid,
+            'sno' => "'{$sno}'",
+            'mode ' =>  "'{$mode}'",
+            'Totalbalance' =>  $Totalbal,
+            'totalPayment' => $totalPay,
+            'RemBalance' => $RemBal,
+        );
+
+
+        $result = $this->insertData($params);
     }
 }

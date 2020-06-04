@@ -53,7 +53,7 @@ if (isset($_POST['ConfirmButtonFullPay'])) {
     $transaction = new Transaction();
     $transaction->setAmount($amount)
         ->setItemList($itemList)
-        ->setDescription("Tuition fee for Montesorri")
+        ->setDescription("Fullpayment")
         ->setInvoiceNumber(uniqid());
 
 
@@ -114,7 +114,7 @@ if (isset($_POST['ConfirmButtonDownPay'])) {
     $transaction = new Transaction();
     $transaction->setAmount($amount)
         ->setItemList($itemList)
-        ->setDescription("Tuition fee for Montesorri")
+        ->setDescription("Downpayment")
         ->setInvoiceNumber(uniqid());
 
 
