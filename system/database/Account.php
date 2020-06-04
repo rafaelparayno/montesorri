@@ -13,7 +13,7 @@ class Account
 
     public function getData()
     {
-        $result = $this->db->con->query("SELECT account_id,personaldata.sno,CONCAT(personaldata.firstname,' ',personaldata.lastname) AS 'Student Name',
+        $result = $this->db->con->query("SELECT account_id,mode,personaldata.sno,CONCAT(personaldata.firstname,' ',personaldata.lastname) AS 'StudentName',
                                         RemBalance,totalPayment,Totalbalance,schoolyear.school_year,sem.semterm FROM `accounts` 
                                         LEFT JOIN schoolyear ON accounts.syid = schoolyear.sy_id 
                                         LEFT JOIN sem ON accounts.semid = sem.semid 
@@ -30,7 +30,7 @@ class Account
 
     public function getDataActivated($semid, $syid)
     {
-        $result = $this->db->con->query("SELECT account_id,personaldata.sno,CONCAT(personaldata.firstname,' ',personaldata.lastname) AS 'Student Name',
+        $result = $this->db->con->query("SELECT account_id,mode,personaldata.sno,CONCAT(personaldata.firstname,' ',personaldata.lastname) AS 'StudentName',
                                         RemBalance,totalPayment,Totalbalance,schoolyear.school_year,sem.semterm FROM `accounts` 
                                         LEFT JOIN schoolyear ON accounts.syid = schoolyear.sy_id 
                                         LEFT JOIN sem ON accounts.semid = sem.semid 
@@ -45,6 +45,24 @@ class Account
 
         return $resultArray;
     }
+
+    public function getStudAccount($sno)
+    {
+        $result = $this->db->con->query("SELECT account_id,mode,RemBalance,totalPayment,Totalbalance,schoolyear.school_year,sem.semterm FROM `accounts` 
+                                        LEFT JOIN schoolyear ON accounts.syid = schoolyear.sy_id 
+                                        LEFT JOIN sem ON accounts.semid = sem.semid 
+                                         LEFT JOIN personaldata ON accounts.sno = personaldata.sno 
+                                         WHERE accounts.sno = '{$sno}'");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
 
 
 

@@ -46,7 +46,7 @@ $accountsList = $account->getDataActivated($smid, $syids);
                                 <th>Total Balance</th>
                                 <th>School Year</th>
                                 <th>School Term</th>
-                                <th>Actions</th>
+
 
                             </tr>
                         </thead>
@@ -57,10 +57,10 @@ $accountsList = $account->getDataActivated($smid, $syids);
                                 <th>Student Name</th>
                                 <th>Remaining Balance</th>
                                 <th>Total Payment</th>
-                                <th>Total Balance</th>
+                                <th>Total</th>
                                 <th>School Year</th>
                                 <th>School Term</th>
-                                <th>Actions</th>
+
                             </tr>
                         </tfoot>
                         <tbody>
@@ -72,17 +72,13 @@ $accountsList = $account->getDataActivated($smid, $syids);
                                     <td><?= $account['StudentName'] ?></td>
                                     <td><?= $account['RemBalance'] ?></td>
                                     <td><?= $account['totalPayment'] ?></td>
-                                    <td><?= $account['TotalBalance'] ?></td>
+                                    <td><?= $account['Totalbalance'] ?></td>
                                     <td><?= $account['school_year'] ?></td>
                                     <td><?= $account['semterm'] ?></td>
 
 
 
-                                    <td>
-                                        <a href="#" class="btn btn-block btn-ifno">Action</a>
-                                        <!-- <a class="btn btn-block btn-info" href="./accountFunction.php?accountid=<?= $account['accountid'] . '&syid=' . $account['syid']  ?>">Activate</a> -->
 
-                                    </td>
                                 </tr>
                             <?php }, $accountsList) ?>
 

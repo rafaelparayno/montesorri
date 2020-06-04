@@ -109,6 +109,10 @@ $role = $_SESSION['lvl'];
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Registration
                         </a>
+                        <a class="nav-link" href="./studentaccounts.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            My Accounts
+                        </a>
 
                     <?php
                     }
