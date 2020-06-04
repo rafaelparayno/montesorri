@@ -7,6 +7,7 @@ require('../../database/DBController.php');
 require('../../database/Account.php');
 require('../../database/SchoolYear.php');
 require('../../database/Sem.php');
+require('../../database/PersonalData.php');
 
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -19,6 +20,7 @@ session_start();
 
 $db = new DBController();
 $account = new Account($db);
+$personal = new PersonalData($db);
 
 $schoolYear = new SchoolYear($db);
 $sem = new Sem($db);
@@ -50,6 +52,7 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
 
         $account->addAccounts($syids, $smid, $sno, $Mode, $total, $total, 0);
     }
+    $personal->updateEnrolled($sno, $smid, $syids);
 
     $transaction = new Transaction();
 

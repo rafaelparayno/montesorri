@@ -166,6 +166,15 @@ class PersonalData
         // }
     }
 
+    public function updateEnrolled($sno, $semid, $syid)
+    {
+        $sql = "UPDATE personaldata SET isEnrolled = 1,semid = {$semid}, syid = {$syid} WHERE sno = '{$sno}'";
+
+        $result = $this->db->con->query($sql);
+        //echo $sql;
+        return $result;
+    }
+
     public function getLastId()
     {
         $result = $this->db->con->query("SELECT personal_id FROM `personaldata` ORDER BY personal_id DESC");

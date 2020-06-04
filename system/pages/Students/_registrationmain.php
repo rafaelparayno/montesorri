@@ -5,6 +5,8 @@ $sno =  $_SESSION['id'];
 
 $yearSy = $schoolYear->schoolYear();
 $semyr = $sem->getSemActivate();
+$isPaid = $account->checkStudPaid($sno, $yearSy['sy_id'], $semyr['semid']);
+
 $personal = $personal->getDatabySearching('sno', $sno);
 $studinfo = $studentsinfo->getDataSearch('sno', $sno);
 $courseName = $course->getDatabySearching('courses_id', $personal['Course']);
@@ -15,6 +17,8 @@ $totalTenPercent = 0;
 $totalPaymentWithPercent = 0;
 $downPayment = 0;
 $totalunits = 0;
+
+
 
 if ($studinfo != null) {
 
@@ -48,65 +52,69 @@ if ($studinfo != null) {
 <main class="">
     <div class="container my-5">
         <div class="row">
-            <div class="col-12 align-self-center">
-                <div class="card card-block p-3 text-center">
-                    <strong class="d-block mb-2 ">Student Name</strong>
-                    <?= $personal['firstname'] . ' ' . $personal['lastname'] ?>
-                    <hr />
-                    <strong class="d-block mb-2 ">Student No</strong>
-                    <?= $sno  ?>
-                    <hr />
-                    <strong class="d-block mb-2 ">Year Level</strong>
-                    <?php
-                    echo  isset($studinfo['year_level']) ?  $studinfo['year_level'] : 1;
-                    ?>
-                    <hr />
-                    <strong class="d-block mb-2 ">Course </strong>
-                    <?= $courseName['coursesName'] ?>
-                    <hr />
-                    <strong class="d-block mb-2 ">Total Units </strong>
-                    <?php
-                    echo  isset($studinfo['allowed_units']) ?  $studinfo['allowed_units'] : "Freshmen Not enrolled with the school";
-                    ?>
-                    <hr />
-                    <strong class="d-block mb-2 ">Section </strong>
-                    <?php
-                    echo  isset($studinfo['sect_enrolled']) ?  $studinfo['sect_enrolled'] : "Freshmen Not enrolled with the school";
-                    ?>
-                    <hr />
-                    <strong class="d-block mb-2 ">Status Student</strong>
-                    <?php
-                    echo  isset($studinfo['status_student']) ?  ($studinfo['status_student'] == 1 ? 'Regular' : 'Iregular')
-                        : "Freshmen Not enrolled with the school";
-                    ?>
-                    <hr />
-                    <strong class="d-block mb-2 ">School Year</strong>
-                    <?= $yearSy['school_year'] ?>
-                    <hr />
-                    <strong class="d-block mb-2 ">Semester</strong>
-                    <?= $semyr['semterm'] ?>
-                    <hr />
-                    <br />
-                    <?php if ($semyr['isOpenReg'] == 0) { ?>
-                        <h2 class="text-warning">Registration is not yet Open</h2>
-                    <?php } else { ?>
-                        <?php if (!isset($studinfo['eval_status'])) {
-
+            <?php if ($isPaid == 0) { ?>
+                <div class="col-12 align-self-center">
+                    <div class="card card-block p-3 text-center">
+                        <strong class="d-block mb-2 ">Student Name</strong>
+                        <?= $personal['firstname'] . ' ' . $personal['lastname'] ?>
+                        <hr />
+                        <strong class="d-block mb-2 ">Student No</strong>
+                        <?= $sno  ?>
+                        <hr />
+                        <strong class="d-block mb-2 ">Year Level</strong>
+                        <?php
+                        echo  isset($studinfo['year_level']) ?  $studinfo['year_level'] : 1;
                         ?>
-                            <button class="btn btn-block btn-info" data-toggle="modal" data-target="#RegModal">Register</button>
-                            <!-- href="./ViewPayment.php?sno=<?= $sno  ?>" -->
-                            <?php } else {
-                            if ($studinfo['eval_status'] == 1) {
+                        <hr />
+                        <strong class="d-block mb-2 ">Course </strong>
+                        <?= $courseName['coursesName'] ?>
+                        <hr />
+                        <strong class="d-block mb-2 ">Total Units </strong>
+                        <?php
+                        echo  isset($studinfo['allowed_units']) ?  $studinfo['allowed_units'] : "Freshmen Not enrolled with the school";
+                        ?>
+                        <hr />
+                        <strong class="d-block mb-2 ">Section </strong>
+                        <?php
+                        echo  isset($studinfo['sect_enrolled']) ?  $studinfo['sect_enrolled'] : "Freshmen Not enrolled with the school";
+                        ?>
+                        <hr />
+                        <strong class="d-block mb-2 ">Status Student</strong>
+                        <?php
+                        echo  isset($studinfo['status_student']) ?  ($studinfo['status_student'] == 1 ? 'Regular' : 'Iregular')
+                            : "Freshmen Not enrolled with the school";
+                        ?>
+                        <hr />
+                        <strong class="d-block mb-2 ">School Year</strong>
+                        <?= $yearSy['school_year'] ?>
+                        <hr />
+                        <strong class="d-block mb-2 ">Semester</strong>
+                        <?= $semyr['semterm'] ?>
+                        <hr />
+                        <br />
+                        <?php if ($semyr['isOpenReg'] == 0) { ?>
+                            <h2 class="text-warning">Registration is not yet Open</h2>
+                        <?php } else { ?>
+                            <?php if (!isset($studinfo['eval_status'])) {
+
                             ?>
                                 <button class="btn btn-block btn-info" data-toggle="modal" data-target="#RegModal">Register</button>
-                            <?php } else { ?>
-                                <p>Cannot Register</p>
+                                <!-- href="./ViewPayment.php?sno=<?= $sno  ?>" -->
+                                <?php } else {
+                                if ($studinfo['eval_status'] == 1) {
+                                ?>
+                                    <button class="btn btn-block btn-info" data-toggle="modal" data-target="#RegModal">Register</button>
+                                <?php } else { ?>
+                                    <p>Cannot Register</p>
+                                <?php } ?>
                             <?php } ?>
                         <?php } ?>
-                    <?php } ?>
 
+                    </div>
                 </div>
-            </div>
+            <?php } else { ?>
+                <h1>Student Already Enrolled</h1>
+            <?php } ?>
 
         </div>
     </div>

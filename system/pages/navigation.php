@@ -51,7 +51,7 @@ $role = $_SESSION['lvl'];
                                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                     Students Enrolled
                                 </a>
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="./PendingStudents.php">
                                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                     Students Pending
                                 </a>

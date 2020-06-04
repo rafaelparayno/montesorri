@@ -41,6 +41,7 @@ $accountsList = $account->getDataActivated($smid, $syids);
                                 <th>account_id</th>
                                 <th>SNO</th>
                                 <th>Student Name</th>
+                                <th>Mode of Payment</th>
                                 <th>Remaining Balance</th>
                                 <th>Total Payment</th>
                                 <th>Total Balance</th>
@@ -55,6 +56,7 @@ $accountsList = $account->getDataActivated($smid, $syids);
                                 <th>account_id</th>
                                 <th>SNO</th>
                                 <th>Student Name</th>
+                                <th>Mode of Payment</th>
                                 <th>Remaining Balance</th>
                                 <th>Total Payment</th>
                                 <th>Total</th>
@@ -70,6 +72,7 @@ $accountsList = $account->getDataActivated($smid, $syids);
                                     <td><?= $account['account_id'] ?></td>
                                     <td><?= $account['sno'] ?></td>
                                     <td><?= $account['StudentName'] ?></td>
+                                    <td><?= $account['mode'] ?></td>
                                     <td><?= $account['RemBalance'] ?></td>
                                     <td><?= $account['totalPayment'] ?></td>
                                     <td><?= $account['Totalbalance'] ?></td>

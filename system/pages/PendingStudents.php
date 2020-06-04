@@ -5,25 +5,23 @@ include('navigation.php');
 
 $schoolYearArgs = $schoolYear->schoolYear();
 $semList = $sem->getSemActivate();
-$studentsList = $personal->getDataWithSemSyid($semList['semid'], $schoolYearArgs['sy_id']);
+$studentsList = $personal->getDataRawQuery("SELECT * FROM personaldata WHERE isEnrolled = 0");
+
 
 
 ?>
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Students Enrolled in <?= $semList['semterm'] ?> Term SY <?= $schoolYearArgs['school_year'] ?></h1>
+        <h1 class="mt-4">Students Pending in <?= $semList['semterm'] ?> Term SY <?= $schoolYearArgs['school_year'] ?></h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Students</li>
         </ol>
 
         <div class="card mb-4">
-            <div class="card-header"><i class="fas fa-table mr-1"></i>Students Table
+            <div class="card-header"><i class="fas fa-table mr-1"></i>Pending Students
             </div>
             <div class="card-body">
-                <div class="d-flex justify-content-end mb-3">
-                    <a href="./addstudents.php" class="btn btn-md btn-success">Add Student</a>
 
-                </div>
                 <div class="table-responsive">
 
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -42,7 +40,7 @@ $studentsList = $personal->getDataWithSemSyid($semList['semid'], $schoolYearArgs
                                 <th>Email Add</th>
                                 <th>Religion</th>
                                 <th>Age</th>
-                                <th>Action</th>
+
                             </tr>
                         </thead>
                         <tfoot>
@@ -60,12 +58,12 @@ $studentsList = $personal->getDataWithSemSyid($semList['semid'], $schoolYearArgs
                                 <th>Email Add</th>
                                 <th>Religion</th>
                                 <th>Age</th>
-                                <th>Action</th>
+
                             </tr>
                         </tfoot>
                         <tbody>
 
-                            <?php array_map(function ($student) use ($account) { ?>
+                            <?php array_map(function ($student) { ?>
                                 <tr>
                                     <td><?= $student['sno'] ?></td>
                                     <td><?= $student['firstname'] . ' ' . $student['lastname'] ?></td>
@@ -83,17 +81,7 @@ $studentsList = $personal->getDataWithSemSyid($semList['semid'], $schoolYearArgs
 
 
 
-                                    <td><a class="btn btn-block btn-primary" href="./editStudent.php?sid=<?= $student['sno'] ?>">Edit</a>
 
-                                        <a class="btn btn-block btn-danger" href="./deleteStudent.php?sno=<?= $student['sno'] ?>">Delete</a>
-                                        <?php
-                                        $isEnrolled = $account->checkStudPaid($student['sno'], $student['syid'], $student['semid']);
-
-                                        if ($isEnrolled == 0) {
-                                        ?>
-                                            <a class="btn btn-block btn-info" href="./evaluation.php?sno=<?= $student['sno'] ?>">Evaluate</a>
-                                        <?php } ?>
-                                    </td>
                                 </tr>
                             <?php }, $studentsList) ?>
 
@@ -105,27 +93,7 @@ $studentsList = $personal->getDataWithSemSyid($semList['semid'], $schoolYearArgs
         </div>
     </div>
 
-    <!-- <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Delete Confirmation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete selected ?</p>
-                </div>
-                <div class="modal-footer">
 
-                    <button type="Submit" class="btn btn-primary">Delete</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                </div>
-            </div>
-        </div>
-    </div> -->
 </main>
 
 

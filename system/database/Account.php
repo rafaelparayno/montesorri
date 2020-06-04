@@ -64,6 +64,16 @@ class Account
     }
 
 
+    public function checkStudPaid($sno, $syid, $semid)
+    {
+        $result = $this->db->con->query("SELECT * FROM `accounts` WHERE sno = '{$sno}' AND syid = {$syid} AND semid = {$semid}");
+
+        $resultArray = mysqli_num_rows($result);
+
+        return $resultArray;
+    }
+
+
 
 
     public function insertData($params = null, $table = "accounts")
