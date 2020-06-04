@@ -5,8 +5,11 @@ include('navigation.php');
 
 
 <?php
-include('Students/_sectionoffer.php');
-
+if ($isShs == 'college') {
+    include('Students/_sectionoffer.php');
+} else {
+    include('Students/_shsoffer.php');
+}
 ?>
 
 <?php

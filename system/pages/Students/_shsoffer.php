@@ -1,17 +1,17 @@
 <?php
 
-$courseList = $course->getData();
+$strands = $strand->getData();
 ?>
 <main>
 
     <div class="container-fluid ">
         <div class="form-group mt-5">
-            <label for="Course">Course</label>
+            <label for="Course">Strand</label>
             <select name="Course" class="form-control " id="courseselect">
 
-                <?php array_map(function ($course) { ?>
-                    <option value="<?= $course['courses_id'] ?>"><?= $course['coursesName'] . '-' . $course['coursesCode'] ?></option>
-                <?php }, $courseList) ?>
+                <?php array_map(function ($strand) { ?>
+                    <option value="<?= $strand['strand_id'] ?>"><?= $strand['strand_name'] . '-' . $strand['strandcode'] ?></option>
+                <?php }, $strands) ?>
             </select>
         </div>
         <div>

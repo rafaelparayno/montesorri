@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2020 at 08:14 AM
+-- Generation Time: Jun 04, 2020 at 10:57 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -31,12 +31,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `accounts` (
   `account_id` int(11) NOT NULL,
   `syid` int(20) NOT NULL,
+  `semid` int(11) NOT NULL,
   `sno` varchar(30) NOT NULL,
   `mode` varchar(20) NOT NULL,
   `Totalbalance` float NOT NULL,
   `totalPayment` float NOT NULL,
   `RemBalance` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`account_id`, `syid`, `semid`, `sno`, `mode`, `Totalbalance`, `totalPayment`, `RemBalance`) VALUES
+(6, 1, 4, '2020-1', 'Fullpayment', 7200, 7200, 0),
+(7, 1, 4, '2020-48', 'Downpayment', 10670, 2667.5, 8002.5);
 
 -- --------------------------------------------------------
 
@@ -119,17 +128,10 @@ CREATE TABLE `famdata` (
 --
 
 INSERT INTO `famdata` (`fam_id`, `fname`, `fcno`, `fo`, `mname`, `mcno`, `mo`, `gname`, `gno`, `gadd`, `grel`, `sno`) VALUES
-(4, 'asdad', 'das', 'asd', 'das', 'adsads', 'asddas', 'dasdas', 'dasdas', 'adsdsa', 'asdad', '2020-5'),
-(6, 'dasd', 'asdsad', 'asdasd', 'adsasd', 'asddsa', 'adsads', 'adsdsa', 'adsdsa', 'dasd', 'dasd', '2020-6'),
-(7, 'asdasd2', 'adsdas', 'adsads', 'adsads', 'asddsa', 'adsdsa', 'adsads', 'adsdas', 'asdasd', 'asdasd2', '2020-8'),
-(8, 'asdasd', 'adssad', 'dasasd', 'adssad', 'adsasd', 'adsdsa', 'adsdsa', 'dasdsa', 'adssadasd', 'asdasd', '2020-9'),
-(9, 'asdasd', 'asdad', 'asdad', 'asdsad', 'asdad', 'asdad', 'asdsad', 'asdasd', 'asdasd', 'asdasd', '2020-10'),
-(12, 'rafael', '031923', 'fo', 'motherrose', '0312312', 'mo', 'n/a', 'n/a', 'n/a', 'rafael', '2020-11'),
-(36, 'asdasdas', 'asdasd', 'asdajd', 'asdasd', 'asdasd', 'asdasd', 'asdasd', 'asdasdasd', 'asdasdasd', 'asdasdas', '2020-12'),
-(38, 'asdas', 'asdasd', 'asdasd', 'asdsad', 'asdasd', 'asdsad', 'asdasd', 'asdsad', 'asdas', 'asdas', '2020-30'),
-(39, 'asdas', 'asdasd', 'asdasd', 'asdads', 'sdafads', 'asddas', 'saddsa', 'asddas', 'asddas', 'asdas', '2020-31'),
-(40, 'asdad', 'asdasd', 'asdasd', 'asdasd', 'dsasdsad', 'asda', 'asdsad', 'asda', 'dasdad', 'asdad', '2020-32'),
-(41, 'asdasd', 'asdasd', 'asdad', 'asddsa', 'saddsasda', 'asdsda', 'adssda', 'dsaasd', 'adsasd', 'asdasd', '2020-34');
+(51, 'dasdas', 'dasdsa', 'dasdas', 'adsads', 'dasdsa', 'adsasd', 'dasasd', 'dasdas', 'adsads', 'dasdas', '2020-1'),
+(53, 'asdasd', 'sdasd', 'asda', 'asda', 'asdad', 'sdasd', 'asda', 'dsda', 'sdasdas', 'asdasd', '2020-45'),
+(54, 'rasdad', 'asdasd', 'asdasd', 'asdasd', 'asdas', 'asdasd', 'asdasd', 'asdasd', 'asdasd', 'rasdad', '2020-47'),
+(55, 'rasadsa', 'asdasd', 'asda', 'asdasd', 'asdad', 'asdsad', 'asdasdaad', 'asdasdasdsa', 'asdasdaqd', 'rasadsa', '2020-48');
 
 -- --------------------------------------------------------
 
@@ -141,6 +143,7 @@ CREATE TABLE `fees` (
   `fee_id` int(11) NOT NULL,
   `tfPerUnits` float NOT NULL,
   `misc` float NOT NULL,
+  `lvl` int(11) NOT NULL,
   `semid` int(11) NOT NULL,
   `syid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -149,11 +152,27 @@ CREATE TABLE `fees` (
 -- Dumping data for table `fees`
 --
 
-INSERT INTO `fees` (`fee_id`, `tfPerUnits`, `misc`, `semid`, `syid`) VALUES
-(1, 502, 4000, 4, 1),
-(2, 502, 4000, 4, 2),
-(3, 502, 4000, 5, 2),
-(4, 502, 4000, 5, 1);
+INSERT INTO `fees` (`fee_id`, `tfPerUnits`, `misc`, `lvl`, `semid`, `syid`) VALUES
+(1, 300, 4000, 1, 4, 1),
+(2, 502, 4000, 1, 4, 2),
+(3, 502, 4000, 1, 5, 2),
+(4, 502, 4000, 1, 5, 1),
+(6, 350, 4000, 2, 4, 1),
+(7, 400, 4000, 3, 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message`
+--
+
+CREATE TABLE `message` (
+  `message_id` int(11) NOT NULL,
+  `subject` text NOT NULL,
+  `message` text NOT NULL,
+  `sender_id` varchar(50) NOT NULL,
+  `receiver_id` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -188,17 +207,9 @@ CREATE TABLE `personaldata` (
 --
 
 INSERT INTO `personaldata` (`personal_id`, `sno`, `firstname`, `lastname`, `middlename`, `Course`, `pob`, `dob`, `gender`, `civil`, `nationality`, `Address`, `CpNo`, `EmailAdd`, `Religion`, `age`, `isEnrolled`, `semid`, `syid`) VALUES
-(6, '2020-5', 'ads', 'ads', 'asd', 1, 'asd', 'asdasd', 'asdsad', 'asdasd', 'asdasd', 'asdasdasdasdas', 'asdad', 'rafaelllparaynooo23@gmail.com', 'asdasd', 23, 1, 4, 1),
-(8, '2020-6', 'dasads', 'adsdas', 'asdasd', 1, 'asdsa', '23/06/1995', 'adsdsa', 'asdasd', 'asdasd', 'asddsa', '12313213', 'adsasd@gmail.com', 'adsads', 23, 1, 4, 1),
-(9, '2020-8', 'asda', 'asdad', 'asdad', 2, 'asdad', '23/06/1995', 'male', 'asd', 'asd', 'blk 22 lot 8 adelfq', '1323123', 'asdasdas@gmail.com', 'das', 23, 1, 4, 1),
-(10, '2020-9', 'asd', 'sad', 'ads', 1, 'asdasd', '23/06/1995', 'female', 'ads', 'das', 'adsasd', 'asdadssda', 'zasdada@gmail.com', 'ads', 12, 1, 4, 1),
-(11, '2020-10', 'asdad', 'ads', 'ads', 1, 'asdasd', '23/06/1995', 'asdasd', 'asddas', 'adsasd', 'dasdsa', '123123', 'asdsda@gmail.com', 'adsdas', 23, 1, 4, 1),
-(12, '2020-11', 'Rafael', 'Parayno', 'Guillano', 1, 'manila', '06/23/1995', 'male', 'single', 'filipino', 'blk 22', '09394072051', 'rafaelllparaynooo23@gmail.com', 'catholic', 24, 0, 4, 1),
-(30, '2020-12', 'dasads', 'adsdas', 'adsasd', 1, 'asdsad', '06/23/1995', 'asdad', 'adasdasd', 'asdasdas', 'asdasdas', 'asdasd', 'rafaelllparaynooo23@gmail.com', '`asdsda', 23, 0, 4, 1),
-(31, '2020-30', 'brandot', 'assdasd', 'asdasd', 2, 'asdasd', 'asdasdasd', 'sadasd', 'asdasd', 'asdasd', 'asdasdada', 'asdasd', 'rafaelllparaynooo23@gmail.com', 'asdasd', 23, 0, 4, 1),
-(32, '2020-31', 'asdad', 'asdasda', 'asdad', 1, 'asdasd', 'asdad', 'asdad', 'asdad', 'asdad', 'asdasd', 'asdasd', 'rafaelllparaynooo23@gmail.com', 'asdad', 23, 0, 4, 1),
-(34, '2020-32', 'asdasd', 'adsdsa', 'asddsa', 1, 'dasdsa', '23/06/1995', 'dsasda', 'asddas', 'asddas', 'asdadasdasdasdasd', 'asdasdasdaasdad', 'asdasd@gmail.com', 'asddas', 23, 1, 4, 2),
-(35, '2020-34', 'asdad', 'asd', 'asdad', 1, 'asdasd', '23/06/1995', 'asdd', 'asdasd', 'asdasd', 'asdasdasd', '23', 'asdasdas@gmail.com', 'asdasd', 23, 1, 4, 2);
+(45, '2020-1', 'rafael guillano', 'parayno', 'guiterrez', 1, 'manila', '06/23/1995', 'male', 'single', 'pinoy', 'blk 22 lot 8', '09394072051', 'rafael.gmail.com@gmail.com', 'atheist', 24, 1, 4, 1),
+(47, '2020-45', 'asdasd', 'asdsadas', 'asdassd', 2, 'manila', '06/23/1995', 'male', 'adsads', 'asddas', 'asdasda', '23131231', 'rafaelllparaynooo23@gmail.com', 'asdasd', 23, 1, 4, 1),
+(49, '2020-48', 'asd', 'asd', 'asd', 1, 'maila', '06/23/1995', 'male', 'single', 'filipino', 'blk22', '093123', 'rafael.parayno23@gmail.com', 'catholic', 23, 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -230,8 +241,8 @@ CREATE TABLE `schoolyear` (
 --
 
 INSERT INTO `schoolyear` (`sy_id`, `school_year`, `sy_status`) VALUES
-(1, '2020-2021', 'disable'),
-(2, '2021-2022', 'activate');
+(1, '2020-2021', 'activate'),
+(2, '2021-2022', 'disable');
 
 -- --------------------------------------------------------
 
@@ -268,16 +279,72 @@ CREATE TABLE `sem` (
   `semid` int(11) NOT NULL,
   `semterm` int(11) NOT NULL,
   `sem_status` varchar(15) NOT NULL,
-  `syid` int(11) NOT NULL
+  `syid` int(11) NOT NULL,
+  `isOpenReg` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sem`
 --
 
-INSERT INTO `sem` (`semid`, `semterm`, `sem_status`, `syid`) VALUES
-(4, 1, 'activate', 1),
-(5, 2, 'disable', 1);
+INSERT INTO `sem` (`semid`, `semterm`, `sem_status`, `syid`, `isOpenReg`) VALUES
+(4, 1, 'activate', 1, 1),
+(5, 2, 'disable', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shspersonal`
+--
+
+CREATE TABLE `shspersonal` (
+  `shsp_id` int(11) NOT NULL,
+  `shsno` varchar(50) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `middlename` varchar(20) NOT NULL,
+  `strand` int(11) NOT NULL,
+  `pob` varchar(20) NOT NULL,
+  `dob` varchar(20) NOT NULL,
+  `gender` varchar(20) NOT NULL,
+  `civil` varchar(20) NOT NULL,
+  `nationality` varchar(20) NOT NULL,
+  `Address` text NOT NULL,
+  `CpNo` varchar(20) NOT NULL,
+  `EmailAdd` varchar(50) NOT NULL,
+  `Religion` varchar(20) NOT NULL,
+  `age` int(11) NOT NULL,
+  `isEnrolled` int(11) NOT NULL,
+  `semid` int(11) NOT NULL,
+  `syid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `shspersonal`
+--
+
+INSERT INTO `shspersonal` (`shsp_id`, `shsno`, `firstname`, `lastname`, `middlename`, `strand`, `pob`, `dob`, `gender`, `civil`, `nationality`, `Address`, `CpNo`, `EmailAdd`, `Religion`, `age`, `isEnrolled`, `semid`, `syid`) VALUES
+(2, 'shs-2020-2', 'ads', 'ads', 'ads', 1, 'asdad', '23/06/1995', 'asdad', 'asdad', 'asdad', 'blk 22', 'asdasdas', 'asdasdas@gmail.com', 'asdads', 23, 0, 0, 0),
+(3, 'shs-2020-3', 'asdad', 'dasda', 'assda', 1, 'asdad', '06/23/1995', 'asdad', 'asd', 'asd', 'ads', 'asdsad', 'rafaelllparaynooo23@gmail.com', 'asd', 23, 1, 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `strand`
+--
+
+CREATE TABLE `strand` (
+  `strand_id` int(11) NOT NULL,
+  `strand_name` varchar(50) NOT NULL,
+  `strandcode` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `strand`
+--
+
+INSERT INTO `strand` (`strand_id`, `strand_name`, `strandcode`) VALUES
+(1, 'Accountancy Business Management', 'ABM');
 
 -- --------------------------------------------------------
 
@@ -290,8 +357,17 @@ CREATE TABLE `studentsinfo` (
   `sno` varchar(50) NOT NULL,
   `sect_enrolled` int(11) NOT NULL,
   `year_level` int(11) NOT NULL,
+  `allowed_units` int(11) NOT NULL,
+  `status_student` int(11) NOT NULL,
   `eval_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `studentsinfo`
+--
+
+INSERT INTO `studentsinfo` (`studinfo_id`, `sno`, `sect_enrolled`, `year_level`, `allowed_units`, `status_student`, `eval_status`) VALUES
+(11, '2020-1', 1, 3, 8, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -320,7 +396,9 @@ INSERT INTO `subjectstbl` (`subject_id`, `subjectname`, `subjectcode`, `subject_
 (3, 'basic filipino', 'filip1', 3, 1, 4, 1, 1),
 (4, 'basic English', 'comarts1', 3, 1, 4, 1, 1),
 (5, 'computer programming', 'copro1', 5, 1, 4, 1, 1),
-(6, 'data structure', 'datastruc1', 5, 1, 4, 1, 1);
+(6, 'data structure', 'datastruc1', 5, 1, 4, 1, 1),
+(7, 'sdadas', 'subcode', 5, 3, 4, 1, 1),
+(8, 'asdasd', 'asdsad', 3, 3, 4, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -342,8 +420,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `userole`, `acc_id`) VALUES
 (1, 'admin', '$2y$10$9Hsto9ZGKPYsV14tKRh0EOqBX4CA0L9RmiknJtWkJEkzqHv.zPj7S', 1, '1'),
-(4, 'rafaelllparaynooo23@gmail.com', '$2y$10$n6JTTbVoyF2yZKrCecnyJu3rVIXH/R5kZmncW1J6LqpFjFhrJkZg2', 2, '2020-30'),
-(5, 'rafaelllparaynooo23@gmail.com', '$2y$10$O9KKllew6jCv1tSkoHwenO94Z.PvBer/.snxyYx0gkJa.AIokT4La', 2, '2020-31');
+(24, 'rafael.gmail.com@gmail.com', '$2y$10$i5Mad0Bji/jsC4JJWTlQi.eVJPhoYu8gixtO6Jf/j7nm/KbtweYHy', 2, '2020-1'),
+(25, 'rafael.parayno23@gmail.com', '$2y$10$fXA/.cOIWiqCR55tZCX.wuMBvmDyBoLxArTKYyvY3hxU.7YWxVVhu', 2, '2020-48'),
+(26, 'rafaelllparaynooo23@gmail.com', '$2y$10$mvuUU7.gVvEHVJLKooBiEeA3GrtbEcLjMOj3G6XWRH/cE0ELbW3.K', 2, 'shs-2020-3');
 
 --
 -- Indexes for dumped tables
@@ -386,6 +465,12 @@ ALTER TABLE `fees`
   ADD PRIMARY KEY (`fee_id`);
 
 --
+-- Indexes for table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`message_id`);
+
+--
 -- Indexes for table `personaldata`
 --
 ALTER TABLE `personaldata`
@@ -416,6 +501,18 @@ ALTER TABLE `sem`
   ADD PRIMARY KEY (`semid`);
 
 --
+-- Indexes for table `shspersonal`
+--
+ALTER TABLE `shspersonal`
+  ADD PRIMARY KEY (`shsp_id`);
+
+--
+-- Indexes for table `strand`
+--
+ALTER TABLE `strand`
+  ADD PRIMARY KEY (`strand_id`);
+
+--
 -- Indexes for table `studentsinfo`
 --
 ALTER TABLE `studentsinfo`
@@ -441,7 +538,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -465,19 +562,25 @@ ALTER TABLE `educ_data`
 -- AUTO_INCREMENT for table `famdata`
 --
 ALTER TABLE `famdata`
-  MODIFY `fam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `fam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `fees`
 --
 ALTER TABLE `fees`
-  MODIFY `fee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `fee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `message`
+--
+ALTER TABLE `message`
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `personaldata`
 --
 ALTER TABLE `personaldata`
-  MODIFY `personal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `personal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `registration`
@@ -489,7 +592,7 @@ ALTER TABLE `registration`
 -- AUTO_INCREMENT for table `schoolyear`
 --
 ALTER TABLE `schoolyear`
-  MODIFY `sy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `sy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sections`
@@ -504,22 +607,34 @@ ALTER TABLE `sem`
   MODIFY `semid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `shspersonal`
+--
+ALTER TABLE `shspersonal`
+  MODIFY `shsp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `strand`
+--
+ALTER TABLE `strand`
+  MODIFY `strand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `studentsinfo`
 --
 ALTER TABLE `studentsinfo`
-  MODIFY `studinfo_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `studinfo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `subjectstbl`
 --
 ALTER TABLE `subjectstbl`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
