@@ -14,6 +14,7 @@ require('../database/Fee.php');
 require('../database/Studentsinfo.php');
 require('../database/Message.php');
 require('../database/Account.php');
+require('../database/Strand.php');
 
 
 $db = new DBController();
@@ -31,3 +32,4 @@ $studentsinfo = new Studentsinfo($db);
 $users = new User($db);
 $message = new Message($db);
 $account = new Account($db);
+$strand = new Strand($db);

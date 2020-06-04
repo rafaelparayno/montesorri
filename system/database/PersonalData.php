@@ -177,7 +177,7 @@ class PersonalData
 
     public function getLastId()
     {
-        $result = $this->db->con->query("SELECT personal_id FROM `personaldata` ORDER BY personal_id DESC");
+        $result = $this->db->con->query("SELECT AUTO_INCREMENT as Last_id FROM information_schema.TABLES WHERE TABLE_NAME = 'personaldata'");
         $lastid = $result->fetch_row();
 
         return $lastid[0];

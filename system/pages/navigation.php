@@ -49,11 +49,19 @@ $role = $_SESSION['lvl'];
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="./students.php">
                                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                                    Students Enrolled
+                                    College Students Enrolled
                                 </a>
                                 <a class="nav-link" href="./PendingStudents.php">
                                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                                    Students Pending
+                                    College Students Pending
+                                </a>
+                                <a class="nav-link" href="./PendingStudents.php">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                    SHS Student Enrolled
+                                </a>
+                                <a class="nav-link" href="./PendingStudents.php">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                    SHS Student Pending
                                 </a>
                             </nav>
                         </div>
@@ -61,6 +69,10 @@ $role = $_SESSION['lvl'];
                         <a class="nav-link" href="./course.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Courses
+                        </a>
+                        <a class="nav-link" href="./strands.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Strand
                         </a>
                         <a class="nav-link" href="./subjects.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
