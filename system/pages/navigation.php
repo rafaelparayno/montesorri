@@ -1,5 +1,6 @@
 <?php
 $role = $_SESSION['lvl'];
+$sno =  $_SESSION['id'];
 ?>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Montessori</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href=""><i class="fas fa-bars"></i></button><!-- Navbar Search-->
@@ -55,11 +56,11 @@ $role = $_SESSION['lvl'];
                                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                     College Students Pending
                                 </a>
-                                <a class="nav-link" href="./PendingStudents.php">
+                                <a class="nav-link" href="./shsStudents.php">
                                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                     SHS Student Enrolled
                                 </a>
-                                <a class="nav-link" href="./PendingStudents.php">
+                                <a class="nav-link" href="./shsStudentsPend.php">
                                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                     SHS Student Pending
                                 </a>
@@ -105,28 +106,44 @@ $role = $_SESSION['lvl'];
                     <?php
                     } else {
                     ?>
+
+                        <?php
+                        $isShs = strpos($sno, 'shs') !== false ? 'shs' : 'college';
+                        ?>
+
                         <a class="nav-link" href="./message.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
                             Message
                         </a>
-                        <a class="nav-link" href="./StudentProfile.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                            profile
-                        </a>
-                        <a class="nav-link" href="./sectionoffering.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Section Offering
-                        </a>
-                        <a class="nav-link" href="./registration.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Registration
-                        </a>
-                        <a class="nav-link" href="./studentaccounts.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            My Accounts
-                        </a>
+                        <?php
+                        if ($isShs == 'college') {
+                        ?>
+                            <a class="nav-link" href="./StudentProfile.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                profile
+                            </a>
+                            <a class="nav-link" href="./sectionoffering.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Section Offering
+                            </a>
+                            <a class="nav-link" href="./registration.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Registration
+                            </a>
+                            <a class="nav-link" href="./studentaccounts.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                My Accounts
+                            </a>
+
+                        <?php } else {
+                        ?>
+                            <a class="nav-link" href="./sectionoffering.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                SHS Section Offering
+                            </a>
 
                     <?php
+                        }
                     }
                     ?>
                 </div>

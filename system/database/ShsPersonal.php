@@ -168,7 +168,7 @@ class ShsPersonal
 
     public function updateEnrolled($sno, $semid, $syid)
     {
-        $sql = "UPDATE shspersonal SET isEnrolled = 1,semid = {$semid}, syid = {$syid} WHERE sno = '{$sno}'";
+        $sql = "UPDATE shspersonal SET isEnrolled = 1,semid = {$semid}, syid = {$syid} WHERE shsno = '{$sno}'";
 
         $result = $this->db->con->query($sql);
         //echo $sql;

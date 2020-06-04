@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail->Username = "inventory.noreply23@gmail.com";
         $mail->Password = "pifxwhutjjypgsbg";
         $mail->SetFrom("inventory.noreply23@gmail.com");
-        $mail->Subject = "Confirm Email and Check Tuition Fee for Downpayment for specific Course";
+        $mail->Subject = "Confirm Email";
         $mail->Body = $body;
         $mail->AddAddress($_POST['email']);
         if (!$mail->Send()) {

@@ -3,6 +3,7 @@
 require('../database/DBController.php');
 
 require('../database/PersonalData.php');
+require('../database/ShsPersonal.php');
 require('../database/FamilyData.php');
 require('../database/SchoolYear.php');
 require('../database/Sem.php');
@@ -20,6 +21,7 @@ require('../database/Strand.php');
 $db = new DBController();
 
 $personal = new PersonalData($db);
+$shspersonal = new ShsPersonal($db);
 $family = new FamilyData($db);
 
 $schoolYear = new SchoolYear($db);
