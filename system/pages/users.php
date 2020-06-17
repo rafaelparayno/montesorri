@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
                                     <td>
-                                        <button data-toggle="modal" data-target="#resetPassword" data-userid="<?php echo $user['user_id']; ?>" href="main_user.php#myModal" class="btn btn-block btn-info">
+                                        <button data-toggle="modal" data-target="#resetPassword" data-userid="<?php echo $user['user_id']; ?>" href="" class="btn btn-block btn-info">
                                             Reset Password
                                         </button>
                                         <!-- <a class="btn btn-block btn-info" href="./evaluation.php?sno=<?= $user['sno'] ?>">Reset Password</a> -->

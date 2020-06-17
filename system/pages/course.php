@@ -5,6 +5,18 @@ include('navigation.php');
 
 $courseList = $course->getData();
 
+
+if (isset($_POST['submitEditCourse'])) {
+    $id = $_POST['courseidModal'];
+    $name = $_POST['courseNameEdit'];
+    $code =  $_POST['coursecodeEdit'];
+
+    $course->editCourse($id, $name, $code);
+
+    echo "<script>window.location='/mpc/system/pages/course.php';</script>";
+}
+
+
 ?>
 <main>
     <div class="container-fluid">
@@ -57,7 +69,7 @@ $courseList = $course->getData();
 
                                     <td>
 
-                                        <a class="btn btn-block btn-info" href="./courseFunction.php?courseid=<?= $course['course_id']  ?>">edit</a>
+                                        <a class="btn btn-block btn-info" data-toggle="modal" data-target="#editModalCourse" data-name="<?php echo $course['coursesName']; ?>" data-code="<?php echo $course['coursesCode']; ?>" data-courseid="<?php echo $course['courses_id']; ?>" href="">edit</a>
 
                                     </td>
                                 </tr>
@@ -101,6 +113,40 @@ $courseList = $course->getData();
             </div>
         </div>
     </div>
+
+
+    <div id="editModalCourse" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Courses</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="courseName">Course Name</label>
+                            <input id="courseNameEdit" type="text" name="courseNameEdit" />
+                        </div>
+                        <div class="form-group">
+                            <label for="coursecode">Course Code</label>
+                            <input id="coursecodeEdit" type="text" name="coursecodeEdit" />
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="courseidModal" value="">
+                    <button type="Submit" name="submitEditCourse" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </main>
 
 

@@ -13,6 +13,19 @@ $syids = $schoolYearArgs['sy_id'];
 
 
 $sectionList = $section->getData($syids, $semList['semid']);
+
+
+if (isset($_POST['submitEditSect'])) {
+    $id = $_POST['sectIdEdit'];
+    $name = $_POST['sectnameEdit'];
+    $yr =  $_POST['sectyrEdit'];
+
+    $section->editSection($id, $name, $yr);
+
+    echo "<script>window.location='/mpc/system/pages/sections.php';</script>";
+}
+
+
 ?>
 <main>
     <div class="container-fluid">
@@ -72,7 +85,7 @@ $sectionList = $section->getData($syids, $semList['semid']);
                                     <td>
 
                                         <!-- <a class="btn btn-block btn-info" href="./sectionFunction.php?sectionid=<?= $section['semid'] . '&syid=' . $syids  ?>">Edit</a> -->
-                                        <a class="btn btn-block btn-info" href="">Edit</a>
+                                        <a class="btn btn-block btn-info" data-toggle="modal" data-yr="<?= $section['section_yr'] ?>" data-sectid="<?= $section['section_id'] ?>" data-name="<?= $section['section_name'] ?>" data-target="#editModalSections" href="">Edit</a>
 
                                     </td>
                                 </tr>
@@ -135,6 +148,40 @@ $sectionList = $section->getData($syids, $semList['semid']);
             </div>
         </div>
     </div>
+
+
+    <div id="editModalSections" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Section</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="sectnameEdit">Section Name</label>
+                            <input id="sectnameEdit" type="text" name="sectnameEdit" />
+                        </div>
+                        <div class="form-group">
+                            <label for="sectyrEdit">Section Year Level</label>
+                            <input id="sectyrEdit" type="number" min="1" max="4" name="sectyrEdit" />
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="sectIdEdit" />
+                    <button type="Submit" name="submitEditSect" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </main>
 
 

@@ -11,27 +11,17 @@ $courseList = $course->getData();
 $syids = $schoolYearArgs['sy_id'];
 $subjectlist = $subject->getData($syids, $semList['semid']);
 
-//$s = $subject->getDataSearchFresh($syids, $semList['semid'], $course);
+if (isset($_POST['submitEditSub'])) {
+    $id = $_POST['strandId'];
+    $name = $_POST['subnameEdit'];
+    $code =  $_POST['subcodeEdit'];
+    $yr = $_POST['subyrEdit'];
+    $units = $_POST['subunitEdit'];
 
+    $subject->editSubjects($id, $name, $code, $yr, $units);
 
-
-
-
-// $slist = "";
-// $slist = array_map(function ($subs) {
-//     return  $subs['subjectname'];
-// }, $s);
-
-// $subjectimplode = implode(',', array_values($slist));
-
-// $subjectexplode = explode(',', $subjectimplode);
-// $printSubj = "";
-// foreach ($subjectexplode as $item) {
-//     $printSubj .= $item . '\n';
-// }
-
-// echo nl2br($printSubj);
-
+    echo "<script>window.location='/mpc/system/pages/subjects.php';</script>";
+}
 
 
 ?>
@@ -58,7 +48,8 @@ $subjectlist = $subject->getData($syids, $semList['semid']);
                                 <th>Id</th>
                                 <th>Subject Name</th>
                                 <th>Subject code</th>
-                                <th>Subject Yr</th>
+                                <th>Year</th>
+                                <th>Course</th>
                                 <th>Sem </th>
                                 <th>School Year</th>
                                 <th>Action</th>
@@ -70,7 +61,8 @@ $subjectlist = $subject->getData($syids, $semList['semid']);
                                 <th>Id</th>
                                 <th>Subject Name</th>
                                 <th>Subject code</th>
-                                <th>Subject Yr</th>
+                                <th>Year</th>
+                                <th>course</th>
                                 <th>Sem </th>
                                 <th>School Year</th>
                                 <th>Action</th>
@@ -83,6 +75,7 @@ $subjectlist = $subject->getData($syids, $semList['semid']);
                                     <td><?= $subject['subject_id'] ?></td>
                                     <td><?= $subject['subjectname'] ?></td>
                                     <td><?= $subject['subjectcode'] ?></td>
+                                    <td><?= $subject['subyr'] ?></td>
                                     <td><?= $subject['coursesName'] ?></td>
                                     <td><?= $subject['semterm'] ?></td>
                                     <td><?= $subject['school_year'] ?></td>
@@ -92,8 +85,8 @@ $subjectlist = $subject->getData($syids, $semList['semid']);
 
                                     <td>
 
-                                        <!-- <a class="btn btn-block btn-info" href="./subjectFunction.php?subjectid=<?= $subject['semid'] . '&syid=' . $syids  ?>">Edit</a> -->
-                                        <a class="btn btn-block btn-info" href="">Edit</a>
+
+                                        <a class="btn btn-block btn-info" data-toggle="modal" data-target="#editModalSubjects" data-yr="<?php echo $subject['subyr']; ?>" data-units="<?php echo $subject['subject_units']; ?>" data-course="<?php echo $subject['coursesName']; ?>" data-name="<?php echo $subject['subjectname']; ?>" data-code="<?php echo $subject['subjectcode']; ?>" data-subid="<?php echo $subject['subject_id']; ?>" href="">Edit</a>
 
                                     </td>
                                 </tr>
@@ -157,6 +150,50 @@ $subjectlist = $subject->getData($syids, $semList['semid']);
                     <input type="hidden" value="<?= $semList['semid'] ?>" name="semid" />
                     <input type="hidden" value="<?= $schoolYearArgs['sy_id'] ?>" name="syid" />
                     <button type="Submit" name="submitaddSub" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="editModalSubjects" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Subject</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        <div class="form-row">
+                            <label for="subnameEdit">Subject Name</label>
+                            <input id="subnameEdit" type="text" name="subnameEdit" />
+                        </div>
+                        <div class="form-group">
+                            <label for="subcodeEdit">Subject Code</label>
+                            <input id="subcodeEdit" type="text" name="subcodeEdit" />
+                        </div>
+                        <div class="form-group">
+                            <label for="subyrEdit">Sub Year Level</label>
+                            <input id="subyrEdit" type="number" min="1" max="4" name="subyrEdit" />
+                        </div>
+                        <div class="form-group">
+                            <label for="subunitEdit">Subjects Units</label>
+                            <input id="subunitEdit" type="number" min="1" max="5" name="subunitEdit" />
+                        </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" value="<?= $semList['semid'] ?>" name="semid" />
+                    <input type="hidden" value="<?= $schoolYearArgs['sy_id'] ?>" name="syid" />
+                    <input type="hidden" name="strandId" />
+                    <button type="Submit" name="submitEditSub" class="btn btn-primary">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
                     </form>

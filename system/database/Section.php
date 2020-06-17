@@ -101,18 +101,14 @@ class Section
     }
 
 
-    // public function activateSem(
-    //     $syid,
-    //     $semid
-    // ) {
-    //     $sql = "UPDATE sem SET sem_status  ='disable' WHERE sem_status  = 'activate'";
-    //     $this->db->con->query($sql);
+    public function editSection($id, $name, $yr)
+    {
+        $queryString = "UPDATE sections SET section_name = '{$name}', 
+                        section_yr = '{$yr}' WHERE section_id = {$id}";
 
-    //     $sql = "UPDATE sem SET sem_status = 'activate' WHERE syid = {$syid} AND semid = {$semid} ";
 
-    //     $result = $this->db->con->query($sql);
-    //     //echo $sql;
-    //     return $result;
-    // }
 
+        $result = $this->db->con->query($queryString);
+        return $result;
+    }
 }

@@ -13,7 +13,7 @@ class Subject
 
     public function getData($syid, $semid)
     {
-        $result = $this->db->con->query("SELECT subject_id,subjectname,subjectcode,subyr,coursesName,school_year,semterm 
+        $result = $this->db->con->query("SELECT subject_id,subjectname,subject_units,subjectcode,subyr,coursesName,school_year,semterm 
                                         FROM `subjectstbl` LEFT JOIN schoolyear ON subjectstbl.syid = schoolyear.sy_id 
                                         LEFT JOIN sem ON subjectstbl.semid = sem.semid 
                                         LEFT JOIN courses ON subjectstbl.course_id = courses.courses_id   
@@ -100,31 +100,14 @@ class Subject
         return $resultArray;
     }
 
-    // public function returnUnitsForlvl($cid, $ylvl, $semid, $syid)
-    // {
-    //     $result = $this->db->con->query("SELECT * FROM `subjectstbl` WHERE `syid` = {$syid} AND `semid` = {$semid} AND `course_id` = {$cid} AND `subyr` = {$ylvl}");
 
-    //     $resultArray = array();
+    public function editSubjects($id, $name, $code, $yr, $units)
+    {
 
-    //     while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-    //         $resultArray[] = $item;
-    //     }
+        $queryString = "UPDATE subjectstbl SET subjectname = '{$name}', subjectcode = '{$code}',
+                        subject_units = {$units}, subyr = {$yr} WHERE subject_id = $id";
 
-    //     return $resultArray;
-    // }
-
-    // public function activateSem(
-    //     $syid,
-    //     $semid
-    // ) {
-    //     $sql = "UPDATE sem SET sem_status  ='disable' WHERE sem_status  = 'activate'";
-    //     $this->db->con->query($sql);
-
-    //     $sql = "UPDATE sem SET sem_status = 'activate' WHERE syid = {$syid} AND semid = {$semid} ";
-
-    //     $result = $this->db->con->query($sql);
-    //     //echo $sql;
-    //     return $result;
-    // }
-
+        $result = $this->db->con->query($queryString);
+        return $result;
+    }
 }

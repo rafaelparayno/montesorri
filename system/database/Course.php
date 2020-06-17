@@ -70,4 +70,14 @@ class Course
 
         //   return $result;
     }
+
+
+    public function editCourse($id, $name, $code)
+    {
+        $queryString = "UPDATE courses SET coursesName = '{$name}', 
+                    coursesCode ='{$code}' WHERE courses_id = {$id}";
+
+        $result = $this->db->con->query($queryString);
+        return $result;
+    }
 }

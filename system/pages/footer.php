@@ -231,6 +231,59 @@
         });
         //modalResetPassword
 
+        //EDITS
+
+        $('#editModalCourse').on('show.bs.modal', function(e) {
+            const courseId = $(e.relatedTarget).data('courseid');
+            const code = $(e.relatedTarget).data('code');
+            const coursename = $(e.relatedTarget).data('name');
+
+            $(e.currentTarget).find('input[name="courseidModal"]').val(courseId);
+            $(e.currentTarget).find('input[name="coursecodeEdit"]').val(code);
+            $(e.currentTarget).find('input[name="courseNameEdit"]').val(coursename);
+        });
+
+
+        $('#editModalStrand').on('show.bs.modal', function(e) {
+            const strandid = $(e.relatedTarget).data('strandid');
+            const code = $(e.relatedTarget).data('code');
+            const name = $(e.relatedTarget).data('name');
+
+            $(e.currentTarget).find('input[name="strandId"]').val(strandid);
+            $(e.currentTarget).find('input[name="strandcodeEdit"]').val(code);
+            $(e.currentTarget).find('input[name="strandNameEdit"]').val(name);
+        });
+
+
+
+        $('#editModalSubjects').on('show.bs.modal', function(e) {
+            const subid = $(e.relatedTarget).data('subid');
+            const code = $(e.relatedTarget).data('code');
+            const name = $(e.relatedTarget).data('name');
+            const unit = $(e.relatedTarget).data('units');
+            const yr = $(e.relatedTarget).data('yr');
+
+            $(e.currentTarget).find('input[name="strandId"]').val(subid);
+            $(e.currentTarget).find('input[name="subcodeEdit"]').val(code);
+            $(e.currentTarget).find('input[name="subnameEdit"]').val(name);
+            $(e.currentTarget).find('input[name="subunitEdit"]').val(unit);
+            $(e.currentTarget).find('input[name="subyrEdit"]').val(yr);
+        });
+
+        $('#editModalSections').on('show.bs.modal', function(e) {
+            const sectid = $(e.relatedTarget).data('sectid');
+            const yr = $(e.relatedTarget).data('yr');
+            const name = $(e.relatedTarget).data('name');
+
+
+            $(e.currentTarget).find('input[name="sectIdEdit"]').val(sectid);
+            $(e.currentTarget).find('input[name="sectyrEdit"]').val(yr);
+            $(e.currentTarget).find('input[name="sectnameEdit"]').val(name);
+        });
+
+
+        //EDITS
+
 
 
         //ajax for to Message//

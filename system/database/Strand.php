@@ -70,4 +70,14 @@ class Strand
 
         //   return $result;
     }
+
+
+    public function editStrand($id, $name, $code)
+    {
+        $queryString = "UPDATE strand SET strand_name = '{$name}', 
+                    	strandcode ='{$code}' WHERE strand_id = {$id}";
+
+        $result = $this->db->con->query($queryString);
+        return $result;
+    }
 }
