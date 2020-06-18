@@ -13,8 +13,26 @@ $messageList = $message->getDatabySearching('receiver_id', $id);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['saveUserAdmin'])) {
-        $message->addMessage($_POST['text'], $_POST['subjectTxt'], $id, $_POST['receiverId']);
-        // echo $_POST['receiverId'];
+        $pa = "";
+
+        if (isset($_FILES['fileVoice'])) {
+            $file_name = $_FILES['fileVoice']['name'];
+            $file_size = $_FILES['fileVoice']['size'];
+            $file_tmp = $_FILES['fileVoice']['tmp_name'];
+            $file_size = $_FILES['fileVoice']['size'];
+
+            move_uploaded_file($file_tmp, "../files/" . $file_name);
+
+            $pa = '../files/' . $file_name;
+            if ($file_size == 0) {
+                $pa = "";
+            }
+        }
+
+
+
+        $message->addMessage($_POST['text'], $_POST['subjectTxt'], $id, $_POST['receiverId'], $pa);
+        echo $_POST['receiverId'];
     }
 }
 
@@ -48,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 <th>From</th>
                                 <th>Subject</th>
                                 <th>Message</th>
-
+                                <th>Attachment</th>
 
                             </tr>
                         </thead>
@@ -58,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 <th>From</th>
                                 <th>Subject</th>
                                 <th>Message</th>
+                                <th>Attachment</th>
 
 
                             </tr>
@@ -70,6 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                     <td><?= $message['sender_id'] ?></td>
                                     <td><?= $message['subject'] ?></td>
                                     <td><?= $message['message'] ?></td>
+                                    <td><?php
+                                        if ($message['attach'] != "" ||  $message['attach'] != null) {
+                                            echo '<img class="img-responsive" style="width:250px;height:250px;" src="' . $message['attach'] . '" />';
+                                        }
+                                        ?></td>
                                 </tr>
                             <?php }, $messageList) ?>
 
@@ -96,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div id="divdis" class="form-group">
                         <input type="hidden" value="<?php echo $role == 1 ? 2 : 1 ?>" name="userole" id="userRoleMessage" />
                         <!-- <input type="text" name="receiverId" id="receiverId" /> -->
@@ -113,6 +137,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <div class="form-group">
                         <label> Subject : </label> <input type="text" name="subjectTxt">
                     </div>
+
+
+                    <div class="custom-file">
+                        <input type="file" name="fileVoice" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+
                     <div class="form-group">
                         <textarea name="text" id="textMessage"></textarea>
                     </div>

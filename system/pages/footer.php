@@ -45,6 +45,10 @@
         });
     })(jQuery);
     //Slider
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
 
     function fill(Value, sid) {
 
@@ -84,10 +88,6 @@
 
         $('select#courseselect').change(function(e) {
             var selectedcourse = $(this).children("option:selected").val();
-            // var firstyears = $('#ul1styears');
-            // var secondyears = $('#ul2ndyears');
-            // var thirdyears = $('#ul3rdyears');
-            // var fourthyears = $('#ul4thyears');
 
 
             $.ajax({

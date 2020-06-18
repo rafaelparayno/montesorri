@@ -81,13 +81,14 @@ class Message
         }
     }
 
-    public function addMessage($message, $subject, $sender, $receive)
+    public function addMessage($message, $subject, $sender, $receive, $attch)
     {
         $params = array(
             'subject' => "'{$subject}'",
             'message' => "'{$message}'",
             'sender_id' => "'{$sender}'",
             'receiver_id ' =>  "'{$receive}'",
+            'attach' => "'{$attch}'"
         );
 
         $this->insertData($params);
