@@ -59,6 +59,12 @@ $sno =  $_SESSION['id'];
                                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                     SHS Student Pending
                                 </a>
+
+
+                                <a class="nav-link" href="./StudentGrades.php">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                    Student Grades
+                                </a>
                             </nav>
                         </div>
 

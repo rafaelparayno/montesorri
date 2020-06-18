@@ -16,6 +16,7 @@ require('../database/Studentsinfo.php');
 require('../database/Message.php');
 require('../database/Account.php');
 require('../database/Strand.php');
+require('../database/StudentGrade.php');
 
 
 $db = new DBController();
@@ -35,3 +36,4 @@ $users = new User($db);
 $message = new Message($db);
 $account = new Account($db);
 $strand = new Strand($db);
+$studentGrade = new StudentGrade($db);

@@ -168,6 +168,94 @@
 
         });
 
+        $('#searchBtnGrade').on('click', () => {
+            let sno = $('#searchStudentNo').val();
+
+            $.ajax({
+                type: "post",
+                url: "Students/ajax.php",
+                data: {
+                    studentSnoGrade: sno,
+                },
+                success: function(data) {
+                    var obj = jQuery.parseJSON(data);
+
+                    $("#tableGrades").empty();
+                    for (var key in obj) {
+                        var val = obj[key];
+                        let finalGrade = 0;
+                        let results = "No Grade";
+                        let prelimGrade = val.prelim ? val.prelim : 0;
+                        let midtermGrade = val.midterm ? val.midterm : 0;
+                        let finalsGrade = val.finals ? val.finals : 0;
+
+                        if (val.prelim && val.midterm && val.finals) {
+                            finalGrade = computeGradeAvg(prelimGrade, midtermGrade, finalsGrade);
+                            results = getStatus(finalGrade);
+                        }
+
+                        // $("#displayUsersAdmin").append('<p onclick="fill(\'' + val.username + '\')">' + val.username + '</p>');
+                        $("#tableGrades").append(`<tr>
+                                    <td>${val.sno}</td>
+                                    <td>${val.StudentName}</td>
+                                    <td>${val.subjectname}</td>
+                                    <td>${val.section_name}</td>
+                                    <td>${val.subject_units}</td>
+                                    <td>${prelimGrade}</td>
+                                    <td>${midtermGrade}</td>
+                                    <td>${finalsGrade}</td>
+                                    <td>${finalGrade}</td>
+                                    <td>${results}</td>
+                                    <td>                                   
+                                        <a class="btn btn-block btn-info" href="./addStudentGrades.php?sno=${val.sno}&sid=${val.subject_id}">Edit</a>
+                                    </td>
+                                </tr>`);
+
+                    }
+
+
+                }
+
+            });
+
+        });
+
+        const computeGradeAvg = (prelim, midterm, final) => {
+
+            let averageGrade = (Number(prelim) + Number(midterm) + Number(final)) / 3;
+            let finalGrade = 0;
+            if (averageGrade < 75) {
+                finalGrade = 5.0;
+            } else if (averageGrade < 80) {
+                finalGrade = 3.0;
+            } else if (averageGrade < 84) {
+                finalGrade = 2.5;
+            } else if (averageGrade < 88) {
+                finalGrade = 2.25;
+            } else if (averageGrade < 92) {
+                finalGrade = 2.0;
+            } else if (averageGrade < 96) {
+                finalGrade = 1.5;
+            } else if (averageGrade < 100) {
+                finalGrade = 1.25;
+            }
+
+            return finalGrade;
+        }
+
+        function getStatus(finalGrade) {
+            let results = "";
+
+            if (finalGrade > 3) {
+                results = 'Failed';
+            } else {
+                results = 'Passed';
+            }
+
+            return results;
+
+        }
+
         //for selectiong sno in student users
         $('select#snoStudentSelect').change(function(e) {
             var selectedSno = $(this).children("option:selected").val();
