@@ -9,6 +9,7 @@
     ],
     "require": {
         "phpunit/php-timer": "^3.1",
-        "paypal/rest-api-sdk-php": "*"
+        "paypal/rest-api-sdk-php": "*",
+        "dompdf/dompdf": "^0.8.5"
     }
 }

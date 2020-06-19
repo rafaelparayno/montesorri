@@ -46,6 +46,21 @@ class Account
         return $resultArray;
     }
 
+    public function getStudAccountSin($sno, $syid)
+    {
+        $result = $this->db->con->query("SELECT account_id,mode,RemBalance,totalPayment,Totalbalance,schoolyear.school_year,sem.semterm FROM `accounts` 
+                                        LEFT JOIN schoolyear ON accounts.syid = schoolyear.sy_id 
+                                        LEFT JOIN sem ON accounts.semid = sem.semid 
+                                        LEFT JOIN personaldata ON accounts.sno = personaldata.sno 
+                                        WHERE accounts.sno = '{$sno}' AND accounts.syid = {$syid}");
+
+        $acc = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+        return $acc;
+    }
+
+
+
     public function getStudAccount($sno)
     {
         $result = $this->db->con->query("SELECT account_id,mode,RemBalance,totalPayment,Totalbalance,schoolyear.school_year,sem.semterm FROM `accounts` 
@@ -62,6 +77,9 @@ class Account
 
         return $resultArray;
     }
+
+
+
 
 
     public function checkStudPaid($sno, $syid, $semid)

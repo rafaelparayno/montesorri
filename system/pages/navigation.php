@@ -146,7 +146,7 @@ $sno =  $_SESSION['id'];
 
                             <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Print my Cor
+                                my Cor
                             </a>
 
                         <?php } else {
