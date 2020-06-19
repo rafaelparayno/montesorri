@@ -1,6 +1,9 @@
 <?php
 $role = $_SESSION['lvl'];
 $sno =  $_SESSION['id'];
+$yearSy = $schoolYear->schoolYear();
+$semyr = $sem->getSemActivate();
+$isPaid = $account->checkStudPaid($sno, $yearSy['sy_id'], $semyr['semid']);
 ?>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Montessori</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href=""><i class="fas fa-bars"></i></button><!-- Navbar Search-->
@@ -141,13 +144,25 @@ $sno =  $_SESSION['id'];
                             </a>
                             <a class="nav-link" href="./StudentSubjects.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                My Subjects
+                                My Subjects Enrolled
+                            </a>
+
+                            <a class="nav-link" href="./MyGrades.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                My Grades
                             </a>
 
                             <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                my Cor
+                                Course Curriculum
                             </a>
+
+                            <?php if ($isPaid != 0) { ?>
+                                <a class="nav-link" href="./cor.php">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    my Cor
+                                </a>
+                            <?php } ?>
 
                         <?php } else {
                         ?>

@@ -35,6 +35,29 @@ class StudentGrade
         return $resultArray;
     }
 
+
+    public function getData2($sno)
+    {
+        $result = $this->db->con->query("SELECT personaldata.sno,Concat(firstname,' ',lastname) AS 'StudentName',
+                                        sections.section_name,subjectstbl.subjectname,
+                                        subject_units,subjectstbl.subject_id,
+                                        prelim,midterm,finals FROM `personaldata` 
+                                        LEFT JOIN studentsinfo ON personaldata.sno = studentsinfo.sno
+                                        LEFT JOIN sections on sections.section_id = studentsinfo.sect_enrolled
+                                        LEFT JOIN subjectstbl ON subjectstbl.course_id 
+                                        LEFT JOIN studentgrades ON studentgrades.sno = personaldata.sno
+                                        AND studentgrades.subject_id = subjectstbl.subject_id
+                                        WHERE personaldata.sno = '{$sno}'");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
     public function getDataAddingGrade($subjectid, $sno)
     {
         $result = $this->db->con->query("SELECT personaldata.sno,Concat(firstname,' ',lastname) AS 'StudentName',
