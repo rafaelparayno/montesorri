@@ -139,6 +139,15 @@ $sno =  $_SESSION['id'];
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 My Accounts
                             </a>
+                            <a class="nav-link" href="./StudentSubjects.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                My Subjects
+                            </a>
+
+                            <a class="nav-link" href="#">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Print my Cor
+                            </a>
 
                         <?php } else {
                         ?>

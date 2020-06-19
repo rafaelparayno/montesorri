@@ -57,6 +57,36 @@ class Subject
         return $resultArray;
     }
 
+    public function getDataFresh($sno)
+    {
+
+        $result = $this->db->con->query("SELECT * FROM `subjectstbl` WHERE course_id in (SELECT Course FROM personaldata WHERE sno = '{$sno}' ) AND subyr = 1");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
+    public function getDataNotFresh($sno)
+    {
+
+        $result = $this->db->con->query("SELECT * FROM `subjectstbl` WHERE course_id in
+                                         (SELECT Course FROM personaldata WHERE sno = '{$sno}' ) 
+                                         AND subyr in(SELECT year_level FROM studentsinfo WHERE sno = '{$sno}')");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
     public function insertData($params = null, $table = "subjectstbl")
     {
         if ($this->db->con != null) {
