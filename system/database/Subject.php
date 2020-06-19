@@ -44,6 +44,24 @@ class Subject
         return $resultArray;
     }
 
+    public function getCurriculumStudent($sno)
+    {
+        $result = $this->db->con->query("SELECT subjectstbl.subjectcode,subjectstbl.subjectname,subjectstbl.subject_units, 
+                                        subyr, CONCAT(sem.semterm,' Term') as 'schoolterm',prelim FROM `subjectstbl` 
+                                        LEFT JOIN sem ON sem.semid = subjectstbl.semid 
+                                        LEFT JOIN studentgrades ON subjectstbl.subject_id = studentgrades.subject_id AND
+                                        studentgrades.sno = '{$sno}'
+                                        LEFT JOIN schoolyear ON sem.syid = schoolyear.sy_id WHERE course_id in (SELECT Course FROM personaldata WHERE sno = '{$sno}')");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
     public function getDataSearchFresh($syid, $semid, $courseid)
     {
         $result = $this->db->con->query("SELECT * FROM `subjectstbl` WHERE `syid` = {$syid} AND `semid` = {$semid} AND `course_id` = {$courseid} AND `subyr` = 1");

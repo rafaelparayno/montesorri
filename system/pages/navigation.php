@@ -152,7 +152,7 @@ $isPaid = $account->checkStudPaid($sno, $yearSy['sy_id'], $semyr['semid']);
                                 My Grades
                             </a>
 
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="./MyCurriculum.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Course Curriculum
                             </a>
