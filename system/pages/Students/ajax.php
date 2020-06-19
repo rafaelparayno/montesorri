@@ -20,6 +20,7 @@ $sem = new Sem($db);
 $schoolYear = new SchoolYear($db);
 $personal = new PersonalData($db);
 $studentGrade = new StudentGrade($db);
+$subject = new Subject($db);
 
 $user = new User($db);
 
@@ -65,6 +66,16 @@ if (isset($_POST['studentSnoGrade'])) {
 
     // $userRole = $_POST['userole'];
     $results = $studentGrade->getData($syids, $semList['semid'], $_POST['studentSnoGrade']);
+    // // $results = 
+    echo json_encode($results);
+}
+
+
+if (isset($_POST['searchCode'])) {
+
+
+    // $userRole = $_POST['userole'];
+    $results = $subject->getCurriculum($_POST['searchCode']);
     // // $results = 
     echo json_encode($results);
 }

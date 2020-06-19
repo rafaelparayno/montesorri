@@ -16,8 +16,24 @@ class Subject
         $result = $this->db->con->query("SELECT subject_id,subjectname,subject_units,subjectcode,subyr,coursesName,school_year,semterm 
                                         FROM `subjectstbl` LEFT JOIN schoolyear ON subjectstbl.syid = schoolyear.sy_id 
                                         LEFT JOIN sem ON subjectstbl.semid = sem.semid 
-                                        LEFT JOIN courses ON subjectstbl.course_id = courses.courses_id   
-                                        WHERE subjectstbl.syid = {$syid} AND subjectstbl.semid = {$semid}");
+                                        LEFT JOIN courses ON subjectstbl.course_id = courses.courses_id");
+
+        $resultArray = array();
+
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
+
+    public function getCurriculum($code)
+    {
+        $result = $this->db->con->query("SELECT subjectstbl.subjectcode,subjectstbl.subjectname,subjectstbl.subject_units, 
+                                        subyr, CONCAT(school_year,' ' , sem.semterm,' Term') as 'schoolterm' FROM `subjectstbl` 
+                                        LEFT JOIN sem ON sem.semid = subjectstbl.semid 
+                                        LEFT JOIN schoolyear ON sem.syid = schoolyear.sy_id WHERE course_id in (SELECT courses_id FROM courses WHERE coursesCode = '{$code}')");
 
         $resultArray = array();
 

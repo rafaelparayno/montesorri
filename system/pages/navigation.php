@@ -80,6 +80,10 @@ $sno =  $_SESSION['id'];
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Subjects
                         </a>
+                        <a class="nav-link" href="./Curriculum.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Curriculum
+                        </a>
                         <a class="nav-link" href="./accounts.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Accounts
