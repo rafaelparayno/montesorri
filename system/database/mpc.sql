@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2020 at 10:57 PM
+-- Generation Time: Jun 20, 2020 at 06:07 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -171,8 +171,19 @@ CREATE TABLE `message` (
   `subject` text NOT NULL,
   `message` text NOT NULL,
   `sender_id` varchar(50) NOT NULL,
-  `receiver_id` varchar(50) NOT NULL
+  `receiver_id` varchar(50) NOT NULL,
+  `attach` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`message_id`, `subject`, `message`, `sender_id`, `receiver_id`, `attach`) VALUES
+(33, 'asdasd', '<p>asdasdadasda</p>\r\n', '2020-48', '1', ''),
+(34, 'asdasd', '<p>asdasdadasda</p>\r\n', '2020-48', '1', ''),
+(36, 'asdsadads', '', '2020-48', '1', '../files/datside.png'),
+(37, 'MY INVOICE', '<p>mam goodmorning sir. this is my invoice</p>\r\n', '2020-48', '1', '../files/datside.png');
 
 -- --------------------------------------------------------
 
@@ -265,7 +276,7 @@ CREATE TABLE `sections` (
 
 INSERT INTO `sections` (`section_id`, `section_name`, `section_yr`, `course_id`, `syid`, `semid`) VALUES
 (1, 'bsad23', 3, 1, 1, 4),
-(2, 'asdad23', 2, 2, 1, 4),
+(2, 'asdad', 2, 2, 1, 4),
 (3, 'bsit101', 1, 1, 1, 4),
 (4, 'bscs101', 1, 2, 1, 4);
 
@@ -349,6 +360,28 @@ INSERT INTO `strand` (`strand_id`, `strand_name`, `strandcode`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `studentgrades`
+--
+
+CREATE TABLE `studentgrades` (
+  `grades_id` int(11) NOT NULL,
+  `sno` varchar(255) NOT NULL,
+  `prelim` int(11) NOT NULL,
+  `midterm` int(11) NOT NULL,
+  `finals` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `studentgrades`
+--
+
+INSERT INTO `studentgrades` (`grades_id`, `sno`, `prelim`, `midterm`, `finals`, `subject_id`) VALUES
+(5, '2020-1', 89, 85, 85, 7);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `studentsinfo`
 --
 
@@ -392,7 +425,7 @@ CREATE TABLE `subjectstbl` (
 
 INSERT INTO `subjectstbl` (`subject_id`, `subjectname`, `subjectcode`, `subject_units`, `subyr`, `semid`, `syid`, `course_id`) VALUES
 (1, 'asdasddasdsa', 'asd', 3, 2, 4, 1, 1),
-(2, 'asdads', 'dasdas', 3, 1, 4, 1, 1),
+(2, 'asdads', 'dasdadd', 3, 1, 4, 1, 1),
 (3, 'basic filipino', 'filip1', 3, 1, 4, 1, 1),
 (4, 'basic English', 'comarts1', 3, 1, 4, 1, 1),
 (5, 'computer programming', 'copro1', 5, 1, 4, 1, 1),
@@ -420,7 +453,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `userole`, `acc_id`) VALUES
 (1, 'admin', '$2y$10$9Hsto9ZGKPYsV14tKRh0EOqBX4CA0L9RmiknJtWkJEkzqHv.zPj7S', 1, '1'),
-(24, 'rafael.gmail.com@gmail.com', '$2y$10$i5Mad0Bji/jsC4JJWTlQi.eVJPhoYu8gixtO6Jf/j7nm/KbtweYHy', 2, '2020-1'),
+(24, 'rafael.gmail.com@gmail.com', '$2y$10$8YMNc8KAa0TyfJxw3b3mieW1kOb7jTfKJMf/PEbiL7esFF6SaGdPu', 2, '2020-1'),
 (25, 'rafael.parayno23@gmail.com', '$2y$10$fXA/.cOIWiqCR55tZCX.wuMBvmDyBoLxArTKYyvY3hxU.7YWxVVhu', 2, '2020-48'),
 (26, 'rafaelllparaynooo23@gmail.com', '$2y$10$mvuUU7.gVvEHVJLKooBiEeA3GrtbEcLjMOj3G6XWRH/cE0ELbW3.K', 2, 'shs-2020-3');
 
@@ -513,6 +546,12 @@ ALTER TABLE `strand`
   ADD PRIMARY KEY (`strand_id`);
 
 --
+-- Indexes for table `studentgrades`
+--
+ALTER TABLE `studentgrades`
+  ADD PRIMARY KEY (`grades_id`);
+
+--
 -- Indexes for table `studentsinfo`
 --
 ALTER TABLE `studentsinfo`
@@ -574,7 +613,7 @@ ALTER TABLE `fees`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `personaldata`
@@ -617,6 +656,12 @@ ALTER TABLE `shspersonal`
 --
 ALTER TABLE `strand`
   MODIFY `strand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `studentgrades`
+--
+ALTER TABLE `studentgrades`
+  MODIFY `grades_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `studentsinfo`
