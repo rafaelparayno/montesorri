@@ -178,8 +178,8 @@ please click the button below and confirm your e-mail address." .
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 465; // or 587
         $mail->IsHTML(true);
-        $mail->Username = "inventory.noreply23@gmail.com";
-        $mail->Password = "pifxwhutjjypgsbg";
+        $mail->Username = "SECRET";
+        $mail->Password = "SECRET";
         $mail->SetFrom("inventory.noreply23@gmail.com");
         $mail->Subject = "Confirm Email and Check Tuition Fee for Downpayment for specific Course";
         $mail->Body = $body;
